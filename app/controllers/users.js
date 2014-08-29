@@ -1,6 +1,7 @@
 'use strict';
 
-var User = require('../models/user');
+var User    = require('../models/user'),
+    Message = require('../models/message');
 
 exports.new = function(req, res){
   res.render('users/new');
@@ -28,6 +29,7 @@ exports.create = function(req, res){
 
 exports.authenticate = function(req, res){
   User.authenticate(req.body, function(user){
+    debugger;
     if(user){
       req.session.regenerate(function(){
         req.session.userId = user._id;

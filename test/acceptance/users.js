@@ -40,6 +40,79 @@ describe('users', function(){
     });
   });
 
+  describe('post /register', function(){
+    it('should register a new user', function(done){
+      request(app)
+      .post('/register')
+      .send('email=larray%40aol.com&password=1234')
+      .end(function(err, res){
+        expect(res.status).to.equal(302);
+        expect(res.headers.location).to.equal('/login');
+        done();
+      });
+    });
+
+    it('should not register a new user', function(done){
+      request(app)
+      .post('/register')
+      .send('email=bob%40aol.com&password=1234')
+      .end(function(err, res){
+        expect(res.status).to.equal(302);
+        expect(res.headers.location).to.equal('/register');
+        done();
+      });
+    });
+  });
+
+  describe('get /login', function(){
+    it('should show the login page', function(done){
+      request(app)
+      .get('/login')
+      .end(function(err, res){
+        expect(res.status).to.equal(200);
+        expect(res.text).to.include('Login');
+        done();
+      });
+    });
+  });
+
+  describe('post /login', function(){
+    it('should login a user', function(done){
+      request(app)
+      .post('/login')
+      .send('email=bob%40aol.com&password=1234')
+      .end(function(err, res){
+        expect(res.status).to.equal(302);
+        expect(res.headers.location).to.equal('/profile');
+        done();
+      });
+    });
+
+    it('should not login a user', function(done){
+      request(app)
+      .post('/login')
+      .send('email=bob%40aol.com&password=4567')
+      .end(function(err, res){
+        expect(res.status).to.equal(302);
+        expect(res.headers.location).to.equal('/login');
+        done();
+      });
+    });
+  });
+
+  describe('delete /logout', function(){
+    it('should log out a user', function(done){
+      request(app)
+      .delete('/logout')
+      .set('cookie', cookie)
+      .end(function(err, res){
+        expect(res.status).to.equal(302);
+        expect(res.headers.location).to.equal('/');
+        done();
+      });
+    });
+  });
+
   describe('get /profile', function(){
     it('should show the profile page', function(done){
       request(app)
@@ -75,6 +148,21 @@ describe('users', function(){
       .end(function(err, res){
         expect(res.status).to.equal(302);
         expect(res.headers.location).to.equal('/profile');
+        done();
+      });
+    });
+  });
+
+  describe('get /users/newItem', function(){
+    it('should display the add item page', function(done){
+      request(app)
+      .get('/users/newItem')
+      .set('cookie', cookie)
+      .end(function(err, res){
+        expect(res.status).to.equal(200);
+        expect(res.text).to.include('Add Item');
+        expect(res.text).to.include('Tags');
+        expect(res.text).to.include('Not for Sale');
         done();
       });
     });
