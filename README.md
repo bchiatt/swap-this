@@ -1,7 +1,7 @@
 ## name of project
 ### Code Badges
-build status icon
-coverage status icon
+[![Build Status](https://travis-ci.org/bchiatt/swap-this.svg)](https://travis-ci.org/bchiatt/swap-this)
+[![Coverage Status](https://coveralls.io/repos/bchiatt/swap-this/badge.png)](https://coveralls.io/r/bchiatt/swap-this)
 
 ### About
 write a description about your project
