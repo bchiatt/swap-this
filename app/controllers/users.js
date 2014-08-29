@@ -19,7 +19,7 @@ exports.logout = function(req, res){
 exports.create = function(req, res){
   User.register(req.body, function(err, user){
     if(user){
-      res.redirect('/');
+      res.redirect('/login');
     }else{
       res.redirect('/register');
     }
@@ -41,3 +41,20 @@ exports.authenticate = function(req, res){
   });
 };
 
+exports.edit = function(req, res){
+  res.render('users/edit');
+};
+
+exports.update = function(req, res){
+  res.locals.user.save(req.body, function(){
+    res.redirect('/profile');
+  });
+};
+
+exports.show = function(req, res){
+  res.render('users/show');
+};
+
+exports.newItem = function(req, res){
+  res.render('users/newItem');
+};

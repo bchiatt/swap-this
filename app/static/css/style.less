@@ -1,6 +1,23 @@
-@base: #f938ab;
+@import url(http://fonts.googleapis.com/css?family=Lobster); // font for SwapThis in nav bar
+@import url(http://fonts.googleapis.com/css?family=Abel); //font for labels on forms
+@import url(http://fonts.googleapis.com/css?family=Yanone+Kaffeesatz); // font for h2
+
+@base: white;
 
 body{
   background-color: saturate(@base, 5%);
 }
 
+.navbar-default .navbar-brand {
+  font-family: 'Lobster', cursive;
+  font-size: 35px;
+}
+
+label {
+  font-family: 'Abel', sans-serif;
+  font-size: 22px;
+}
+
+h2 {
+  font-family: 'Yanone Kaffeesatz', sans-serif;
+}

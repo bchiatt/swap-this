@@ -2,7 +2,7 @@
 
 'use strict';
 
-process.env.DB   = 'template-test';
+process.env.DB   = 'swap-test';
 
 var expect  = require('chai').expect,
     cp      = require('child_process'),
@@ -35,6 +35,46 @@ describe('users', function(){
       .end(function(err, res){
         expect(res.status).to.equal(200);
         expect(res.text).to.include('Register');
+        done();
+      });
+    });
+  });
+
+  describe('get /profile', function(){
+    it('should show the profile page', function(done){
+      request(app)
+      .get('/profile')
+      .set('cookie', cookie)
+      .end(function(err, res){
+        expect(res.status).to.equal(200);
+        expect(res.text).to.include('Available');
+        expect(res.text).to.include('Photo');
+        done();
+      });
+    });
+  });
+
+  describe('get /profile/edit', function(){
+    it('should show the edit profile page', function(done){
+      request(app)
+      .get('/profile/edit')
+      .set('cookie', cookie)
+      .end(function(err, res){
+        expect(res.status).to.equal(200);
+        expect(res.text).to.include('Edit Profile');
+        done();
+      });
+    });
+  });
+
+  describe('put /profile', function(){
+    it('should redirect to the profile page', function(done){
+      request(app)
+      .put('/profile')
+      .set('cookie', cookie)
+      .end(function(err, res){
+        expect(res.status).to.equal(302);
+        expect(res.headers.location).to.equal('/profile');
         done();
       });
     });
