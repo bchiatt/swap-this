@@ -32,7 +32,7 @@ exports.authenticate = function(req, res){
       req.session.regenerate(function(){
         req.session.userId = user._id;
         req.session.save(function(){
-          res.redirect('/');
+          res.redirect('/profile');
         });
       });
     }else{
@@ -57,4 +57,24 @@ exports.show = function(req, res){
 
 exports.newItem = function(req, res){
   res.render('users/newItem');
+};
+
+exports.send = function(req, res){
+  User.findById(req.params.userId, function(err, receiver){
+    res.locals.user.send(receiver, req.body, function(){
+      res.redirect('/users/' + receiver.email);
+    });
+  });
+};
+
+exports.messages = function(req, res){
+  res.locals.user.messages(function(err, msgs){
+    res.render('users/messages', {msgs:msgs});
+  });
+};
+
+exports.message = function(req, res){
+  Message.read(req.params.msgId, function(err, msg){
+    res.render('users/message', {msg:msg});
+  });
 };

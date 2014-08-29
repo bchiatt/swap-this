@@ -11,9 +11,9 @@
     .collapse.navbar-collapse#bs-navbar-collapse
       ul.nav.navbar-nav.navbar-right
         if user
-          li: a(href='#') Add Item
-          li: a(href='#') Messages
+          li: a(href='/users/newItem') Add Item
           li: a(href='/profile') Profile
+          li: a(href='/messages') Messages
           li
             form.navbar-form(method='post', action='/logout')
               .form-group

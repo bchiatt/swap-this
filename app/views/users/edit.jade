@@ -2,7 +2,7 @@ extends ../shared/template
 block content
   h2 Edit Profile
   .row
-    .col-xs-6
+    .col-xs-4.col-xs-offset-4
       form(role='form', method='post', action='/profile')
         input(type='hidden', name='_method', value='put')
         .form-group
@@ -20,7 +20,6 @@ block content
 
 
         button.btn.btn-success(type='submit') Submit
-    .col-xs-6
 
 block scripts
 
