@@ -25,11 +25,11 @@
     "url": "https://github.com/bchiatt/swap-this"
   },
   "author": "Brian Hiatt <brian.hiatt41@gmail.com>",
-  "contributors": {
+  "contributors": [
     "Jessica Raines <jessicafraines@gmail.com>",
     "Joy Pratt <joypratt820@gmail.com>",
     "Sarah Pearson <sarahp@me.com>"
-  },
+  ],
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/bchiatt/swap-this/issues"
