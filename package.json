@@ -1,7 +1,7 @@
 {
-  "name": "template",
+  "name": "swap-this",
   "version": "0.0.0",
-  "description": "Node.js/Express Template",
+  "description": "App combining the best features of ebay, craigslist, and swap meet. Users exchange goods, not money.",
   "main": "app/index.js",
   "directories": {
     "test": "test"
@@ -22,14 +22,19 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/nss-cohort-2014-06-07/template"
+    "url": "https://github.com/bchiatt/swap-this"
   },
-  "author": "Chyld Medford <chyld.medford@gmail.com>",
+  "author": "Brian Hiatt <brian.hiatt41@gmail.com>",
+  "contributors": {
+    "Jessica Raines <jessicafraines@gmail.com>",
+    "Joy Pratt <joypratt820@gmail.com>",
+    "Sarah Pearson <sarahp@me.com>"
+  },
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/nss-cohort-2014-06-07/template/issues"
+    "url": "https://github.com/bchiatt/swap-this/issues"
   },
-  "homepage": "https://github.com/nss-cohort-2014-06-07/template",
+  "homepage": "https://github.com/bchiatt/swap-this",
   "dependencies": {
     "async": "^0.9.0",
     "bcrypt": "^0.8.0",
