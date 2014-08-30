@@ -11,8 +11,8 @@
     .collapse.navbar-collapse#bs-navbar-collapse
       ul.nav.navbar-nav.navbar-right
         if user
+          li: a(href='/items') Find Items
           li: a(href='/items/new') Add Item
-          li: a(href='/items') Items
           //li: a(href='/profile') Profile
           li.dropdown
             a.dropdown-toggle(href='/profile', data-toggle='dropdown') Profile

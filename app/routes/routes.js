@@ -40,8 +40,8 @@ module.exports = function(app, express){
   app.get('/items/:itemId', items.show);
   app.get('/items/:itemId/bid', items.newBid);
   app.post('/items/:itemId/bid', items.bid);
-  app.get('/items', items.index);
-  app.post('/items', items.create);
+  app.get('/items/:itemId/edit', items.edit);
+  app.post('/items/:itemId/edit', items.update);
   app.post('/offers', items.offers);
   app.get('/offers/:itemId/accept/:bidId/', items.accept);
   app.get('/offers/:itemId/reject/:bidId/', items.reject);
