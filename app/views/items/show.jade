@@ -4,7 +4,7 @@ block content
   h2 Owner: #{client.email}
   .row#location(data-location= client.location, data-lat= client.lat, data-lng= client.lng)
     .col-xs-12
-      h2: a(href'/profile/edit')= client.email
+      h2: a(href=(client.email === user.email ? '/profile' : '/users/' + client.email))= client.email
       h4= client.location
   .row
     h1= item.name
