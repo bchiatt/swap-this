@@ -25,6 +25,7 @@ Object.defineProperty(Item, 'collection', {
 Item.create = function(ownerId, fields, files, cb){
   var i = new Item(ownerId, fields);
   i.photos = moveFiles(files, 0, '/img/' + i._id);
+  console.log('>>><<<', item);
   Item.collection.save(i, cb);
 };
 
