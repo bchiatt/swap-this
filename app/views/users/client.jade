@@ -1,7 +1,7 @@
 extends ../shared/template
 block content
   h2 Client Page
-  .row
+  .row#location(data-location= client.location, data-lat= client.lat, data-lng= client.lng)
     .col-xs-12
       h2=client.email
       h5=client.location
