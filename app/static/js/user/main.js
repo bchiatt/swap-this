@@ -16,21 +16,14 @@ function geocode(address, cb){
 function initMap(selector, lat, lng, zoom){
   'use strict';
 
-  var mapOptions = {center: new google.maps.LatLng(lat, lng), zoom: zoom, mapTypeId: google.maps.MapTypeId.ROADMAP},
-      map = new google.maps.Map(document.getElementById(selector), mapOptions);
+  //add snazzy maps by replaying the styles line.
+  var styles     = [{'featureType':'water','stylers':[{'visibility':'on'},{'color':'#b5cbe4'}]},{'featureType':'landscape','stylers':[{'color':'#efefef'}]},{'featureType':'road.highway','elementType':'geometry','stylers':[{'color':'#83a5b0'}]},{'featureType':'road.arterial','elementType':'geometry','stylers':[{'color':'#bdcdd3'}]},{'featureType':'road.local','elementType':'geometry','stylers':[{'color':'#ffffff'}]},{'featureType':'poi.park','elementType':'geometry','stylers':[{'color':'#e3eed3'}]},{'featureType':'administrative','stylers':[{'visibility':'on'},{'lightness':33}]},{'featureType':'road'},{'featureType':'poi.park','elementType':'labels','stylers':[{'visibility':'on'},{'lightness':20}]},{},{'featureType':'road','stylers':[{'lightness':20}]}],
+      mapOptions = {center: new google.maps.LatLng(lat, lng), zoom: zoom, mapTypeId: google.maps.MapTypeId.ROADMAP, styles:styles},
+      map        = new google.maps.Map(document.getElementById(selector), mapOptions);
 
   return map;
 }
 
-function getPositions(){
-  'use strict';
-  var $treasure = $('#treasure'),
-      name = $treasure.attr('data-name'),
-      lat  = $treasure.attr('data-lat'),
-      lng  = $treasure.attr('data-lng'),
-      pos  = {name:name, lat:parseFloat(lat), lng:parseFloat(lng)};
-  return(pos);
-}
 
 function addMarker(map, lat, lng, name, icon){
   'use strict';

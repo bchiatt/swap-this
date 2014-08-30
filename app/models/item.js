@@ -3,16 +3,18 @@
 var Mongo  = require('mongodb'),
     _      = require('lodash'),
     fs     = require('fs'),
-    path  = require('path');
+    path   = require('path');
 
 
 function Item(ownerId, o){
   this._id          = Mongo.ObjectID();
   this.name         = o.name[0];
   this.description  = o.description[0];
-  this.isAvailable  = o.isAvailable[0];
+  this.isAvailable  = (o.isAvailable[0]==='true') ? true : false;
   this.ownerId      = ownerId;
   this.tags         = o.tags[0].trim().split(',').map(function(i){return i.trim();});
+  this.bid          = null;
+  this.bids         = [];
   this.photos       = [];
 }
 
@@ -21,8 +23,6 @@ Object.defineProperty(Item, 'collection', {
 });
 
 Item.create = function(ownerId, fields, files, cb){
-  console.log('fields in ITEM.CREATE>>>>>>>>>>>>>>>', fields);
-  console.log('files in ITEM.CREATE>>>>>>>>>>>>>>>', files);
   var i = new Item(ownerId, fields);
   i.photos = moveFiles(files, 0, '/img/' + i._id);
   Item.collection.save(i, cb);
@@ -37,6 +37,16 @@ Item.findById = function(id, cb){
 
 Item.find = function(filter, cb){
   Item.collection.find(filter).toArray(cb);
+};
+
+Item.query = function(query, cb){
+  var limit  = 5,
+      skip   = query.page ? ((query.page * limit) - limit)     : 0,
+      filter = query.tag  ? {tags:query.tag}                   : {},
+      sort   = {};
+  if(query.sort){sort[query.sort] = query.direction * 1;}
+
+  Item.collection.find(filter).sort(sort).skip(skip).limit(limit).toArray(cb);
 };
 
 Item.prototype.save = function(fields, files, cb){
@@ -78,3 +88,4 @@ function moveFiles(files, count, relDir){
 
   return _.compact(tmpPhotos);
 }
+

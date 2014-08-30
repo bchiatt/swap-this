@@ -1,6 +1,7 @@
 'use strict';
 
 var Item    = require('../models/item'),
+    User    = require('../models/user'),
     mp      = require('multiparty');
 
 exports.new = function(req, res){
@@ -18,5 +19,16 @@ exports.create = function(req, res){
 };
 
 exports.index = function(req, res){
-  res.render('items/index');
+  Item.query(req.query, function(err, items){
+    console.log('THIS IS ITEMS', items);
+    res.render('items/index', {items:items});
+  });
+};
+
+exports.show = function(req, res){
+  Item.findById(req.params.itemId, function(err, item){
+    User.findById(item.ownerId, function(err, client){
+      res.render('items/show', {item:item, client:client});
+    });
+  });
 };

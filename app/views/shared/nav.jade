@@ -12,8 +12,15 @@
       ul.nav.navbar-nav.navbar-right
         if user
           li: a(href='/items/new') Add Item
-          li: a(href='/items') All Items
-          li: a(href='/profile') Profile
+          li: a(href='/items') Items
+          //li: a(href='/profile') Profile
+          li.dropdown
+            a.dropdown-toggle(href='/profile', data-toggle='dropdown') Profile
+              span.caret
+            ul.dropdown-menu(role='menu')
+              li
+                a(href='/profile') View Profile
+                a(href='/profile/edit') Edit Profile
           li: a(href='/messages') Messages
           li
             form.navbar-form(method='post', action='/logout')
