@@ -9,7 +9,9 @@ block content
     .col-xs-3
       a.thumbnail(href='#{user.photo}')
         img(src=user.photo)
-    .col-xs-9
+    .col-xs-3
+      #smallmap
+    .col-xs-3
   .row
     h1 Available
     .col-xs-4
@@ -19,11 +21,11 @@ block content
           th Photo
           th Description
         tbody
-          this will loop through each item in user.items
+          each item in items
             tr
-              td items.name
-              td items.photo
-              td items.description
+              td= item.name
+              td: img(src='#{item.photo}')
+              td= item.description
     .col-xs-4
       h1 Not Available
         this will loop through each itemphoto in user.itemsphoto(!isAvailable) testing this out

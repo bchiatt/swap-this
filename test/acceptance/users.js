@@ -140,10 +140,10 @@ describe('users', function(){
     });
   });
 
-  describe('put /profile', function(){
+  describe('post /profile', function(){
     it('should redirect to the profile page', function(done){
       request(app)
-      .put('/profile')
+      .post('/profile')
       .set('cookie', cookie)
       .end(function(err, res){
         expect(res.status).to.equal(302);
@@ -153,10 +153,10 @@ describe('users', function(){
     });
   });
 
-  describe('get /users/newItem', function(){
+  describe('get items/new', function(){
     it('should display the add item page', function(done){
       request(app)
-      .get('/users/newItem')
+      .get('/items/new')
       .set('cookie', cookie)
       .end(function(err, res){
         expect(res.status).to.equal(200);

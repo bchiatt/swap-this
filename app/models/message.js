@@ -3,23 +3,13 @@
 var async = require('async'),
     Mongo = require('mongodb');
 
-function Message(o){
-  this.senderId   = Mongo.ObjectID(o.frId);
-  this.receiverId = Mongo.ObjectID(o.toId);
-  this.subject    = o.subject;
-  this.message    = o.object;
-  this.date       = new Date();
-  this.isRead     = false;
-}
-
-
-/*function Message(senderId, receiverId, message){
+function Message(senderId, receiverId, message){
   this.senderId   = senderId;
   this.receiverId = receiverId;
   this.message    = message.object;
   this.date       = new Date();
   this.isRead     = false;
-}*/
+}
 
 Object.defineProperty(Message, 'collection', {
   get: function(){return global.mongodb.collection('messages');}

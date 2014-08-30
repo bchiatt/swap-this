@@ -16,12 +16,14 @@ block content
             th tags
             th Seller
           tbody
-            loop througheach treasure in treasures
-              tr(data-name=loc.name, data-lat=loc.lat, data-lng=loc.lng)
-                td a(href='/items/#{items._id}') items.photo
-                td a(href='/items/#{items._id}') items.description
-                td a(href='/items/#{items._id}') items.bids
-                td a(href='/items/#{items._id}') items.location
+            loop througheach item in items
+              tr
+                //(data-name=item.location, data-lat=item.lat, data-lng=item.lng)
+                td a(href='/items/{item._id}') item.photo
+                td a(href='/items/{item._id}') item.description
+                td a(href='/items/{item._id}') item.bids
+                td a(href='/items/{item._id}') item.location
+                td item.tags
                 td a(href='/profile')= user.email
 block scripts
-  script(src='/js/user/items.js')
+  script(src='/js/user/itemsIndex.js')

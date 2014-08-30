@@ -1,6 +1,8 @@
 'use strict';
 
 var User    = require('../models/user'),
+    mp      = require('multiparty'),
+    Item    = require('../models/item'),
     Message = require('../models/message');
 
 exports.new = function(req, res){
@@ -48,17 +50,16 @@ exports.edit = function(req, res){
 };
 
 exports.update = function(req, res){
-  res.locals.user.save(req.body, function(){
-    res.redirect('/profile');
+  var form = new mp.Form();
+  form.parse(req, function(err, fields, files){
+    res.locals.user.save(fields, files, function(){
+      res.redirect('/profile');
+    });
   });
 };
 
-exports.show = function(req, res){
-  res.render('users/show');
-};
-
-exports.newItem = function(req, res){
-  res.render('users/newItem');
+exports.home = function(req, res){
+  res.render('users/home');
 };
 
 exports.send = function(req, res){

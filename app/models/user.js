@@ -3,6 +3,8 @@
 var bcrypt  = require('bcrypt'),
     Mongo   = require('mongodb'),
     _       = require('lodash'),
+    fs      = require('fs'),
+    path    = require('path'),
     Mailgun = require('mailgun-js'),
     Message = require('./message.js');
 
@@ -41,29 +43,35 @@ User.findOne = function(filter, cb){
   User.collection.findOne(filter, cb);
 };
 
-User.prototype.save = function(o, cb){
-  var properties = Object.keys(o),
+User.prototype.save = function(fields, file, cb){
+  var properties = Object.keys(fields),
       self       = this;
 
   properties.forEach(function(property){
-    self[property] = o[property];
+    console.log (fields[property]);
+    self[property] = fields[property][0];
   });
+
+  this.photo = uploadPhoto(file, '/img/' + this._id);
+
   User.collection.save(this, cb);
 };
-//added switch statement JR - We may not need it
-User.prototype.send = function(receiver, obj, cb){
-  switch(obj.mtype){
-    case 'text':
-      sendText(receiver.phone, obj.message, cb);
-      break;
-    case 'email':
-      sendEmail(this.email, receiver.email, obj.subject, obj.message, cb);
-      break;
-    case 'internal':
-      sendInternal(this._id, receiver._id, obj.subject, obj.message, cb);
-      break;
-  }
-};
+
+// PRIVATE FUNCTIONS //
+
+//User.prototype.send = function(receiver, obj, cb){
+//  switch(obj.mtype){
+//    case 'text':
+//      sendText(receiver.phone, obj.message, cb);
+//      break;
+//    case 'email':
+//      sendEmail(this.email, receiver.email, obj.subject, obj.message, cb);
+//      break;
+//    case 'internal':
+//      sendInternal(this._id, receiver._id, obj.subject, obj.message, cb);
+//      break;
+//  }
+//};
 
 //we don't need this if we keep the switch statement above
 
@@ -79,28 +87,47 @@ User.prototype.messages = function(cb){
 };
 
 module.exports = User;
-//Added helper functions - JR
-function sendText(to, body, cb){
-  if(!to){return cb();}
 
-  var accountSid = process.env.TWSID,
-      authToken  = process.env.TWTOK,
-      from       = process.env.FROM,
-      client     = require('twilio')(accountSid, authToken);
+//function sendText(to, body, cb){
+//  if(!to){return cb();}
+//
+//  var accountSid = process.env.TWSID,
+//      authToken  = process.env.TWTOK,
+//      from       = process.env.FROM,
+//      client     = require('twilio')(accountSid, authToken);
+//
+//  client.messages.create({to:to, from:from, body:body}, cb);
+//}
 
-  client.messages.create({to:to, from:from, body:body}, cb);
-}
-
-function sendEmail(from, to, subject, html, cb){
-  if(!to){return cb();}
-
-  var mailgun = new Mailgun({apiKey:process.env.MGAPI, domain:process.env.MGDOM}),
-      data    = {from:from, to:to, subject:subject, html:html};
-
-  mailgun.messages().send(data, cb);
-}
+//function sendEmail(from, to, subject, html, cb){
+//  if(!to){return cb();}
+//
+//  var mailgun = new Mailgun({apiKey:process.env.MGAPI, domain:process.env.MGDOM}),
+//      data    = {from:from, to:to, subject:subject, html:html};
+//
+//  mailgun.messages().send(data, cb);
+//}
 
 function sendInternal(from, to, subject, message, cb){
   var msg = new Message({frId:from, toId:to, subject:subject, body:message});
   msg.save(cb);
+}
+
+function uploadPhoto(photo, relDir){
+  var baseDir = __dirname + '/../static',
+      absDir  = baseDir + relDir;
+  console.log('BASEDIR in upload file', baseDir);
+  console.log('ABSDIR in upload file', absDir);
+  console.log('PHOTO[0].PATH IN UPLOAD FILE', photo.photo[0].path);
+
+  if(!fs.existsSync(absDir)){fs.mkdirSync(absDir);}
+
+  if(!photo.photo[0].size){return;}
+
+  var ext      = path.extname(photo.photo[0].path),
+      name     = 'photo' + ext,
+      absPath  = absDir + '/' + name,
+      relPath  = relDir + '/' + name;
+  fs.renameSync(photo.photo[0].path, absPath);
+  return relPath;
 }

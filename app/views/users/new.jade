@@ -2,7 +2,7 @@ extends ../shared/template
 block content
   h2 Register
   .row
-    .col-xs-6
+    .col-xs-4.col-xs-offset-4
       form(role='form', method='post', action='/register')
         .form-group
           label(for='email') Email
@@ -11,7 +11,6 @@ block content
           label(for='password') Password
           input.form-control#password(type='password', name='password')
         button.btn.btn-primary(type='submit') Submit
-    .col-xs-6
 
 block scripts
 
