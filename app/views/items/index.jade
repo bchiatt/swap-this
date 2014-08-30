@@ -20,13 +20,13 @@ block content
             each location in locations
               tr.locactions(data-lat=location.lat, data-lng=location.lng, data-name=location.email)
             each item in items
-              tr
-                td.photo.thumbnail(style='background-image:url(#{item.photos[0]});')
+              tr: a(href='/items/#{item._id}')
+                td: a(href='/items/#{item._id}').photo.thumbnail(style='background-image:url(#{item.photos[0]});')
                 td: a(href='/items/#{item._id}')= item.name
                 td: a(href='/items/#{item._id}')= item.description
-                td: a(href='/items/#{item._id}')= item.bids
+                td: a(href='/items/#{item._id}')= item.bids.length
                 td: a(href='/items/#{item._id}')= item.location
-                td= item.tags
-                td: a(href='/profile')
+                td: a(href='/items/#{item._id}')= item.tags
+                td: a(href='/items/#{item._id}')= item.ownerId.email
 block scripts
   script(src='/js/user/itemsIndex.js')

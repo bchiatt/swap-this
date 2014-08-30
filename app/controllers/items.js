@@ -44,6 +44,11 @@ exports.newBid = function(req, res){
 };
 
 exports.bid = function(req, res){
+  Item.findById(req.params.itemId, function(err, forSale){
+    Item.findById(req.params.bidId, function(err, bidItem){
+      forSale.bid(bidItem);
+    });
+  });
   res.redirect('/items/' + req.params.itemId);
   //res.locals.user.bid(req.params.itemId, req.params.bidId, function(){
     //res.redirect('/items/' + req.params.itemId);
@@ -70,7 +75,7 @@ exports.update = function(req, res){
 exports.offers = function(req, res){
   //Item.findPending(req.params.itemId, function(err, saleItem){
    // Item.findById(req.params.itemId2, function(err, bidItem){
-      res.render('items/offers' /*, {saleItem:saleItem, bidItem:bidItem}*/);
+  res.render('items/offers' /*, {saleItem:saleItem, bidItem:bidItem}*/);
     //});
  // });
 };

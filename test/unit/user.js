@@ -1,12 +1,12 @@
 /* jshint expr:true */
 /* global describe, it, before, beforeEach */
 
-/*'use strict';
+'use strict';
 
 var expect    = require('chai').expect,
-    Mongo     = require('mongodb'),
+    //Mongo     = require('mongodb'),
     User      = require('../../app/models/user'),
-    Message   = require('../../app/models/message'),
+    //Message   = require('../../app/models/message'),
     dbConnect = require('../../app/lib/mongodb'),
     cp        = require('child_process'),
     db        = 'swap-test';
@@ -57,7 +57,7 @@ describe('User', function(){
     });
   });
 
-  describe('#save', function(){
+ /* describe('#save', function(){
     it('should save a user', function(done){
       var body = {phone:'111-2222'};
       User.findById('000000000000000000000001', function(err, user){
@@ -117,10 +117,7 @@ describe('User', function(){
         });
       });
     });
-  });
-
-
-
+  });*/
 
 }); //final close
-*/
+

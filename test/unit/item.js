@@ -1,12 +1,12 @@
 /* jshint expr:true */
 /* global describe, it, before, beforeEach */
 
-/*'use strict';
+'use strict';
 
 var expect    = require('chai').expect,
-    Mongo     = require('mongodb'),
+    //Mongo     = require('mongodb'),
     Item      = require('../../app/models/item'),
-    Message   = require('../../app/models/message'),
+    //Message   = require('../../app/models/message'),
     dbConnect = require('../../app/lib/mongodb'),
     cp        = require('child_process'),
     db        = 'swap-test';
@@ -24,7 +24,7 @@ describe('Item', function(){
     });
   });
 
-  describe('.create', function(){
+ /* describe('.create', function(){
     it('should create a new Item object', function(){
       var ownerId = '000000000000000000000001',
           fields  = {name:'car', description:'1990 Toyota Corolla', tags:'car, blue'},
@@ -35,22 +35,20 @@ describe('Item', function(){
         expect(item.isAvailable).to.be.true;
       });
     });
-  });
+  });*/
 
   describe('.findById', function(){
     it('should find one item by id', function(done){
       Item.findById('b00000000000000000000001', function(err, item){
         expect(item.name).to.equal('car');
         expect(item).to.be.instanceof(Item);
+        done();
       });
     });
   });
 
-  describe('.find', function(){
+  /*describe('.find', function(){
     it('should find a specific item', function(done){
-      var ownerId = '000000000000000000000001',
-          fields  = {name:'car', description:'1990 Toyota Corolla', tags:'0'},
-          files   = {};
       Item.find({name:'car'}, function(err, item){
         console.log(item);
         expect(item.description).to.equal('1990 Toyota Corolla');
@@ -59,13 +57,7 @@ describe('Item', function(){
     });
   });
 
-  /*describe('.query', function(){
-    it('', function(){
-
-    });
-  });*/
-
- /*describe('#save', function(){
+  describe('#save', function(){
     it('should save an item', function(done){
       var ownerId = '000000000000000000000001',
           fields  = {name:'car', description:'1990 Toyota Corolla', tags:'0'},
@@ -77,7 +69,6 @@ describe('Item', function(){
         });
       });
     });
-  });
-
+  });*/
 }); //final close
-*/
+

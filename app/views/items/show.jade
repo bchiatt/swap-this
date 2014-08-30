@@ -1,21 +1,21 @@
 extends ../shared/template
 block content
   .row#location(data-location= client.location, data-lat= client.lat, data-lng= client.lng)
+      h1 Owner
     .col-xs-6
-      h3 Owner: #{client.email}
-      h4: a(href=(client.email === user.email ? '/profile' : '/users/' + client.email))= client.email
+      h3: a(href=(client.email === user.email ? '/profile' : '/users/' + client.email))= client.email
       h4= client.location
       #smallmap
-      h4= client.location
     .col-xs-6
-      h1= item.name
+      h2= item.name
       each photo in item.photos
         .photo.thumbnail#itemPhotos(style='background-image:url(#{photo});')
   .row
-    form.navbar-form(method='get', action='/items/#{item._id}/bid')
-      .form-group
-        input(type='hidden')
-        button.btn.btn-danger BID!
+    .col-xs-12
+      form.navbar-form(method='get', action='/items/#{item._id}/bid')
+        .form-group
+          input(type='hidden')
+          button.btn.btn-danger.btn-lg BID!
 
 block scripts
   script(src='/js/user/itemShow.js')

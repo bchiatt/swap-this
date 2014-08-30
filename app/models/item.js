@@ -59,8 +59,9 @@ Item.offerCount = function(userId, cb){
   Item.collection.find({ownerId:ownerId, bids: {$not: {$size: 0}}}).count(cb);
 };
 
-Item.findPending = function(itemId, cb){
-};
+//Item.findPending = function(ownerId, cb){
+//  Item.find({ownerId:ownerId, isAvailble:true
+//};
 
 Item.prototype.update = function(fields, files, cb){
   var properties = Object.keys(fields),
@@ -76,8 +77,13 @@ Item.prototype.update = function(fields, files, cb){
   Item.collection.save(this, cb);
 };
 
-Item.prototype.bid = function(itemId, bidId, cb){
+Item.prototype.bid = function(bidId, cb){
+  this.bids.push(bidId);
+};
 
+Item.prototype.cancelBids = function(cb){
+  this.bids = [];
+  Item.collection.save(this, cb);
 };
 
 Item.prototype.accept = function(){
