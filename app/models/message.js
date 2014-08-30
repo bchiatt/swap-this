@@ -26,6 +26,14 @@ Message.send = function(senderId, receiverId, message, cb){
   var m = new Message(senderId, receiverId, message);
   Message.collection.save(m, cb);
 };
+//added .find JR - We may not need it
+Message.find = function(filter, cb){
+  Message.collection.find(filter).toArray(cb);
+};
+//added .save JR - We may not need it
+Message.prototype.save = function(cb){
+  Message.collection.save(this, cb);
+};
 
 Message.unread = function(receiverId, cb){
   Message.collection.find({receiverId:receiverId, isRead:false}).count(cb);
