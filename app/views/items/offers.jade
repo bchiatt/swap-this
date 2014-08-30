@@ -1,31 +1,7 @@
 extends ../shared/template
 block content
   h2 Swap-de-monium
-  .container
-    .row
-      .col-xs-12
-        #bigmap
-    .row
-      .col-xs-12
-        table.table.table-striped
-          thead
-            th Photo
-            th Name
-            th Description
-            th Bids
-            th Location
-            th tags
-            th Seller
-          tbody
-            each item in items
-              tr
-                //(data-name=item.location, data-lat=item.lat, data-lng=item.lng)
-                td.photo.thumbnail(style='background-image:url(#{item.photo[0]});')
-                td: a(href='/items/#{item._id}')= item.name
-                td: a(href='/items/#{item._id}')= item.description
-                td: a(href='/items/#{item._id}')= item.bids
-                td: a(href='/items/#{item._id}')= item.location
-                td= item.tags
-                td: a(href='/profile')
+  h3 Pending Offers
+
 block scripts
   script(src='/js/user/itemsIndex.js')

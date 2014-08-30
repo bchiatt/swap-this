@@ -42,7 +42,7 @@ module.exports = function(app, express){
   app.post('/items/:itemId/bid', items.bid);
   app.get('/items/:itemId/edit', items.edit);
   app.post('/items/:itemId/edit', items.update);
-  app.post('/offers', items.offers);
+  app.get('/offers', items.offers);
   app.get('/offers/:itemId/accept/:bidId/', items.accept);
   app.get('/offers/:itemId/reject/:bidId/', items.reject);
   app.get('/users/:email', users.client);

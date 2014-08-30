@@ -54,6 +54,11 @@ Item.findBids = function(userId, cb){
   Item.collection.find({ownerId:ownerId, bid:null}, {name:1}).toArray(cb);
 };
 
+Item.offerCount = function(userId, cb){
+  var ownerId = Mongo.ObjectID(userId);
+  Item.collection.find({ownerId:ownerId, bids: {$not: {$size: 0}}}).count(cb);
+};
+
 Item.prototype.update = function(fields, files, cb){
   var properties = Object.keys(fields),
       self       = this;

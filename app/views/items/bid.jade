@@ -3,7 +3,7 @@ block content
   h2 BID ITEM
   .row
     .col-xs-4.col-xs-offset-4
-      form(role='form', method='post', action='/items/#{item._d}/bid')
+      form(role='form', method='post', action='/items/#{item._id}/bid')
         .form-group
           label(for='item') To Get That:
           input.form-control#item(type='text', value=item.name, readonly)
@@ -12,7 +12,6 @@ block content
           select.form-control#offer(name='offer')
             each bid in bids
               option(value=bid._id)= bid.name
-
         button.btn.btn-success(type='submit') Submit
 
 block scripts

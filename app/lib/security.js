@@ -1,6 +1,7 @@
 'use strict';
 
 var User    = require('../models/user'),
+    Item    = require('../models/item'),
     Message = require('../models/message');
 
 exports.authenticate = function(req, res, next){
@@ -8,9 +9,12 @@ exports.authenticate = function(req, res, next){
 
   User.findById(req.session.userId, function(err, user){
     Message.unread(req.session.userId, function(err, count){
-      user.unread = count;
-      res.locals.user = user;
-      next();
+      Item.offerCount(req.session.userId, function(err, offers){
+        user.offers = offers;
+        user.unread = count;
+        res.locals.user = user;
+        next();
+      });
     });
   });
 };
