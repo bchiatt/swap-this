@@ -5,6 +5,7 @@
 
 var expect    = require('chai').expect,
     User      = require('../../app/models/user'),
+    Message   = require('../../app/models/message'),
     dbConnect = require('../../app/lib/mongodb'),
     cp        = require('child_process'),
     db        = 'swap-test';
@@ -38,7 +39,6 @@ describe('User', function(){
     });
   });
 
-
   describe('.register', function(){
     it('should register a user', function(done){
       var user = {email:'larry@gmail.com', password:'1234'};
@@ -62,8 +62,6 @@ describe('User', function(){
       User.findById('000000000000000000000001', function(err, user){
         user.save(body, function(err, user, c){
           User.findById('000000000000000000000001', function(err, user){
-            console.log('USER', user);
-            console.log('>>>>>>>', c);
             expect(user.phone).to.equal('111-2222');
             done();
           });
@@ -71,5 +69,57 @@ describe('User', function(){
       });
     });
   });
+
+  describe('#send', function(){
+    it('should send a text message to a user', function(done){
+      User.findById('000000000000000000000001', function(err, sender){
+        User.findById('000000000000000000000002', function(err, receiver){
+          sender.send(receiver, {mtype:'text', message:'hello'}, function(err, response){
+            expect(response.sid).to.be.ok;
+            done();
+          });
+        });
+      });
+    });
+
+    it('should send an email to a user', function(done){
+      User.findById('000000000000000000000001', function(err, sender){
+        User.findById('000000000000000000000003', function(err, receiver){
+          sender.send(receiver, {mtype:'email', subject:'hello', message:'whazup'}, function(err, response){
+            expect(response.id).to.be.ok;
+            done();
+          });
+        });
+      });
+    });
+
+    it('should send an internal message to a user', function(done){
+      User.findById('000000000000000000000001', function(err, sender){
+        User.findById('000000000000000000000003', function(err, receiver){
+          sender.send(receiver, {mtype:'internal', subject:'hello', message:'whazup'}, function(err, response){
+            Message.find({toId:'000000000000000000000003'}, function(err, messages){
+              expect(messages).to.have.length(0);
+              done();
+            });
+          });
+        });
+      });
+    });
+  });
+  //I'm not sure how we test for messages - I entered 2 based off Brian's test for FB
+  describe('#messages', function(){
+    it('should show all user messages', function(done){
+      User.findById('000000000000000000000003', function(err, client){
+        client.messages(function(err, messages){
+          expect(messages).to.have.length(2);
+          done();
+        });
+      });
+    });
+  });
+
+
+
+
 }); //final close
 

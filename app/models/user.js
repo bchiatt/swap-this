@@ -3,6 +3,7 @@
 var bcrypt  = require('bcrypt'),
     Mongo   = require('mongodb'),
     _       = require('lodash'),
+    Mailgun = require('mailgun'),
     Message = require('./message.js');
 
 function User(){
@@ -49,10 +50,25 @@ User.prototype.save = function(o, cb){
   });
   User.collection.save(this, cb);
 };
-
+//added switch statement JR - We may not need it
 User.prototype.send = function(receiver, obj, cb){
-  Message.send(this._id, receiver._id, obj.message, cb);
+  switch(obj.mtype){
+    case 'text':
+      sendText(receiver.phone, obj.message, cb);
+      break;
+    case 'email':
+      sendEmail(this.email, receiver.email, obj.subject, obj.message, cb);
+      break;
+    case 'internal':
+      sendInternal(this, receiver._id, obj.subject, cb);
+      break;
+  }
 };
+
+//we don't need this if we keep the switch statement above
+
+ /* Message.send(this._id, receiver._id, obj.message, cb);
+};*/
 
 User.prototype.unread = function(cb){
   Message.unread(this._id, cb);
@@ -63,4 +79,28 @@ User.prototype.messages = function(cb){
 };
 
 module.exports = User;
+//Added helper functions - JR
+function sendText(to, body, cb){
+  if(!to){return cb();}
 
+  var accountSid = process.env.TWSID,
+      authToken  = process.env.TWTOK,
+      from       = process.env.FROM,
+      client     = require('twilio')(accountSid, authToken);
+
+  client.messages.create({to:to, from:from, body:body}, cb);
+}
+
+function sendEmail(from, to, subject, html, cb){
+  if(!to){return cb();}
+
+  var mailgun = new Mailgun({apiKey:process.enf.MGKEY, domain:process.env.MGDOM}),
+      data    = {from:from, to:to, subject:subject, html:html};
+
+  mailgun.messages().send(data, cb);
+}
+
+function sendInternal(from, to, subject, message, cb){
+  var msg = new Message({from:from, toId:to, subject:subject, body:message});
+  msg.save(cb);
+}
