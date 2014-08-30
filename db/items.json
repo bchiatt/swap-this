@@ -22,7 +22,7 @@
     "description"   : "cabernet-merlot blend, 2014",
     "ownerId"       : {"$oid":"000000000000000000000002"},
     "isAvailable"   : true,
-    "photo"         : ["wine.png"]
+    "photos"         : ["wine.png"]
 }
 {
     "_id"           : {"$oid":"b00000000000000000000004"},
@@ -30,7 +30,7 @@
     "description"   : "happy, nine months old",
     "ownerId"       : {"$oid":"000000000000000000000002"},
     "isAvailable"   : false,
-    "photo"         : ["baby.png"]
+    "photos"         : ["baby.png"]
 }
 {
     "_id"           : {"$oid":"b00000000000000000000005"},
@@ -38,7 +38,7 @@
     "description"   : "Yamaha upright",
     "ownerId"       : {"$oid":"000000000000000000000003"},
     "isAvailable"   : true,
-    "photo"         : ["piano.png"]
+    "photos"         : ["piano.png"]
 }
 {
     "_id"           : {"$oid":"b00000000000000000000006"},
@@ -46,5 +46,5 @@
     "description"   : "dark brown rectangle, 6 chairs",
     "ownerId"       : {"$oid":"000000000000000000000003"},
     "isAvailable"   : true,
-    "photo"         : ["table.png"]
+    "photos"         : ["table.png"]
 }

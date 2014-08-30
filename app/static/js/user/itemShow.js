@@ -4,18 +4,18 @@
   'use strict';
 
   $(document).ready(function(){
-    var pos = getPositions();
-    initMap('smallmap', pos.lat, pos.lng, 7);
-    addMarker(pos.lat, pos.lng, pos.name);
+    var pos = getPosition();
+    var map = initMap('smallmap', pos.lat, pos.lng, 10);
+    addMarker(map, pos.lat, pos.lng, pos.name);
   });
 
-  function getPositions(){
+  function getPosition(){
     var $location = $('#location'),
-        name      = $location.attr('data-name'),
+        name      = $location.attr('data-location'),
         lat       = $location.attr('data-lat'),
         lng       = $location.attr('data-lng'),
         pos       = {name:name, lat:parseFloat(lat), lng:parseFloat(lng)};
-    console.log(pos);
+
     return(pos);
   }
 

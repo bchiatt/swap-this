@@ -20,8 +20,11 @@ exports.create = function(req, res){
 
 exports.index = function(req, res){
   Item.query(req.query, function(err, items){
-    console.log('THIS IS ITEMS', items);
-    res.render('items/index', {items:items});
+    User.getLocations(function(err, locations){
+      console.log('THIS IS ITEMS', items);
+      console.log('THIS IS LOCATIONS', locations);
+      res.render('items/index', {items:items, locations:locations});
+    });
   });
 };
 
