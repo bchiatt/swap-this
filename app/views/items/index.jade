@@ -1,0 +1,27 @@
+extends ../shared/template
+block content
+  h2 Swap-de-monium
+  .container
+    .row
+      .col-xs-12
+        #bigmap
+    .row
+      .col-xs-12
+        table.table.table-striped
+          thead
+            th Photo
+            th Description
+            th Bids
+            th Location
+            th tags
+            th Seller
+          tbody
+            loop througheach treasure in treasures
+              tr(data-name=loc.name, data-lat=loc.lat, data-lng=loc.lng)
+                td a(href='/items/#{items._id}') items.photo
+                td a(href='/items/#{items._id}') items.description
+                td a(href='/items/#{items._id}') items.bids
+                td a(href='/items/#{items._id}') items.location
+                td a(href='/profile')= user.email
+block scripts
+  script(src='/js/user/items.js')
