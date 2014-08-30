@@ -43,6 +43,10 @@ User.findOne = function(filter, cb){
   User.collection.findOne(filter, cb);
 };
 
+User.getLocations = function(cb){
+  User.collection.find({}, {email:1, location:1, lat:1, lng:1}).toArray(cb);
+};
+
 User.prototype.save = function(fields, file, cb){
   var properties = Object.keys(fields),
       self       = this;
