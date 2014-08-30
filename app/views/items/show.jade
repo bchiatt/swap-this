@@ -1,21 +1,14 @@
 extends ../shared/template
 block content
-  h2 Item Page
-  h2 Owner: #{client.email}
   .row#location(data-location= client.location, data-lat= client.lat, data-lng= client.lng)
-    .col-xs-12
-      h2: a(href=(client.email === user.email ? '/profile' : '/users/' + client.email))= client.email
-      h4= client.location
-  .row
-    h1= item.name
-    .col-xs-4
-    .col-xs-4
-    .col-xs-4
-  .row
     .col-xs-6
+      h3 Owner: #{client.email}
+      h4: a(href=(client.email === user.email ? '/profile' : '/users/' + client.email))= client.email
+      h4= client.location
       #smallmap
-  .row
-    .col-xs-12
+      h4= client.location
+    .col-xs-6
+      h1= item.name
       each photo in item.photos
         .photo.thumbnail#itemPhotos(style='background-image:url(#{photo});')
   .row

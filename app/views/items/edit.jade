@@ -1,0 +1,35 @@
+extends ../shared/template
+block content
+  .row
+    .col-xs-6
+      h1 Edit Item:   #{item.name}
+      br
+      form(role='form', method='post', enctype='multipart/form-data')
+        .radio
+          label
+            input(type='radio', name='isAvailable', checked='#{item.isAvailable}')
+            span Available for Sale
+        .radio
+          label
+            input(type='radio' name='isAvailable' checked='#{item.isAvailable}')
+            span Not for Sale
+        .form-group
+          label(for='nameItem') Name of Item
+          input.form-control#name(type='text', name='name', value='#{item.name}')
+        .form-group
+          label(for='description') Description of Item
+          input.form-control#description(type='text', name='description', value='#{item.description}')
+        .form-group
+          label(for='photo') Photos
+          input.form-control#photo(type='file', name='photo', multiple=true)
+        .form-group
+          label(for='tags') Tags
+          input.form-control#tags(type='text', name='tags', value='#{item.tags}')
+        button.btn.btn-success.btn-group-lg(type='submit') Update Item
+    .col-xs-6
+      each photo in item.photos
+        .photo.thumbnail#itemPhotos(style='background-image:url(#{photo});')
+
+
+block scripts
+
