@@ -49,6 +49,11 @@ Item.query = function(query, cb){
   Item.collection.find(filter).sort(sort).skip(skip).limit(limit).toArray(cb);
 };
 
+Item.findBids = function(userId, cb){
+  var ownerId = Mongo.ObjectID(userId);
+  Item.collection.find({ownerId:ownerId, bid:null}, {name:1}).toArray(cb);
+};
+
 Item.prototype.save = function(fields, files, cb){
   var properties = Object.keys(fields),
       self       = this;

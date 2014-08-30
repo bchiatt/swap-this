@@ -18,6 +18,11 @@ block content
     .col-xs-12
       each photo in item.photos
         .photo.thumbnail#itemPhotos(style='background-image:url(#{photo});')
+  .row
+    form.navbar-form(method='get', action='/items/#{item._id}/bid')
+      .form-group
+        input(type='hidden')
+        button.btn.btn-danger BID!
 
 block scripts
   script(src='/js/user/itemShow.js')
