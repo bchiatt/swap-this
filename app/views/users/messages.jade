@@ -21,10 +21,10 @@ block content
                 tr
                   td
                     span.glyphicon(class=(!message.isRead === true ? 'glyphicon-envelope' : 'glyphicon-ok'))
-                  td: a(href='/messages/#{message._id}')=message.from
+                  td: a(href='/messages/#{message._id}')= message.from
                   td=moment(message.sent).format('DD MMM, YYYY')
                   td=message.subject
-                  td=message.body
+                  td: a(href='/messages/#{message._id}')= message.body
         .col-xs-2
 
 

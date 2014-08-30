@@ -175,6 +175,8 @@ describe('users', function(){
       .post('/items')
       .set('cookie', cookie)
       .end(function(err, res){
+        expect(res.status).to.equal(302);
+        expect(res.headers.location).to.equal('/profile');
         done();
       });
     });
@@ -273,6 +275,32 @@ describe('users', function(){
     });
   });
 
+  describe('get /items/:itemId/edit', function(){
+    it('should take you to the edit items page ', function(done){
+      request(app)
+      .get('/items/b00000000000000000000001/edit')
+      .set('cookie', cookie)
+      .end(function(err, res){
+        expect(res.status).to.equal(200);
+        expect(res.text).to.include('edit');
+        done();
+      });
+    });
+  });
+
+  /*describe('post /items/:itemId/edit', function(){
+    it('should ', function(done){
+      request(app)
+      .post('/items/b00000000000000000000001/edit')
+      .set('cookie', cookie)
+      .end(function(err, res){
+        expect(res.status).to.equal(302);
+        expect(res.headers.location).to.include('/profile');
+        done();
+      });
+    });
+  });*/
+
   /*describe('post /items/:itemId/bid', function(){
     it('should redirect to the item show page', function(done){
       request(app)
@@ -293,20 +321,20 @@ describe('users', function(){
       .set('cookie', cookie)
       .end(function(err, res){
         expect(res.status).to.equal(200);
-        expect(res.text).to.include('Pending');
+        expect(res.text).to.include('Response');
         done();
       });
     });
   });
 
-  /*describe('post /offers/:itemId/accept/:bidId/', function(){
+  describe('post /offers/:itemId/accept/:bidId/', function(){
     it('should redirect to the offers page', function(done){
       request(app)
-      .post('/items/:itemId/offers/:itemId2/accept')
+      .post('/offers/b00000000000000000000001/accept/b00000000000000000000002')
       .set('cookie', cookie)
       .end(function(err, res){
         expect(res.status).to.equal(302);
-        expect(res.headers.location).to.include('');
+        expect(res.headers.location).to.include('/offers');
         done();
       });
     });
@@ -315,15 +343,15 @@ describe('users', function(){
   describe('post /offers/:itemId/reject/:bidId/', function(){
     it('should redirect to the offers page', function(done){
       request(app)
-      .post('/items/:itemId/offers/:itemId2/reject')
+      .post('/offers/b00000000000000000000001/reject/b00000000000000000000002')
       .set('cookie', cookie)
       .end(function(err, res){
         expect(res.status).to.equal(302);
-        expect(res.headers.location).to.include('');
+        expect(res.headers.location).to.include('/offers');
         done();
       });
     });
-  });*/
+  });
 
 });
 

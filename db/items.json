@@ -4,7 +4,6 @@
     "description"   : "1990 Toyota Corolla",
     "ownerId"       : {"$oid":"000000000000000000000001"},
     "isAvailable"   : true,
-    "bid"           : null,
     "bids"          : [],
     "tags"          : ["car", "blue"],
     "photos"        : ["/img/undefined/0.jpg", "car.jpg"]
@@ -15,7 +14,6 @@
     "description"   : "4 br, 2 bath, 1970",
     "ownerId"       : {"$oid":"000000000000000000000001"},
     "isAvailable"   : false,
-    "bid"           : null,
     "bids"          : [],
     "photos"        : ["house.png"]
 }
@@ -25,7 +23,6 @@
     "description"   : "cabernet-merlot blend, 2014",
     "ownerId"       : {"$oid":"000000000000000000000002"},
     "isAvailable"   : true,
-    "bid"           : null,
     "bids"          : [],
     "photos"         : ["wine.png"]
 }
@@ -35,7 +32,6 @@
     "description"   : "happy, nine months old",
     "ownerId"       : {"$oid":"000000000000000000000002"},
     "isAvailable"   : false,
-    "bid"           : null,
     "bids"          : [],
     "photos"         : ["baby.png"]
 }
@@ -45,7 +41,6 @@
     "description"   : "Yamaha upright",
     "ownerId"       : {"$oid":"000000000000000000000003"},
     "isAvailable"   : true,
-    "bid"           : null,
     "bids"          : [],
     "photos"         : ["piano.png"]
 }
@@ -55,7 +50,6 @@
     "description"   : "dark brown rectangle, 6 chairs",
     "ownerId"       : {"$oid":"000000000000000000000003"},
     "isAvailable"   : true,
-    "bid"           : null,
     "bids"          : [],
     "photos"         : ["table.png"]
 }

@@ -11,11 +11,10 @@ block content
       each photo in item.photos
         .photo.thumbnail#itemPhotos(style='background-image:url(#{photo});')
   .row
-    .col-xs-12
+    .col-xs-6.col-xs-4
       form.navbar-form(method='get', action='/items/#{item._id}/bid')
         .form-group
           input(type='hidden')
           button.btn.btn-danger.btn-lg BID!
 
 block scripts
-  script(src='/js/user/itemShow.js')

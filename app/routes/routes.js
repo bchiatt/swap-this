@@ -43,8 +43,8 @@ module.exports = function(app, express){
   app.get('/items/:itemId/edit', items.edit);
   app.post('/items/:itemId/edit', items.update);
   app.get('/offers', items.offers);
-  app.get('/offers/:itemId/accept/:bidId/', items.accept);
-  app.get('/offers/:itemId/reject/:bidId/', items.reject);
+  app.post('/offers/:itemId/accept/:bidId/', items.accept);
+  app.post('/offers/:itemId/reject/:bidId/', items.reject);
   app.get('/users/:email', users.client);
   app.post('/messages/:userId', users.send);
   app.get('/messages/:msgId', users.message);

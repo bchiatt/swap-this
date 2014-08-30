@@ -3,7 +3,8 @@
 var Mongo  = require('mongodb'),
     _      = require('lodash'),
     fs     = require('fs'),
-    path   = require('path');
+    path   = require('path'),
+    async  = require('async');
 
 
 function Item(ownerId, o){
@@ -59,9 +60,13 @@ Item.offerCount = function(userId, cb){
   Item.collection.find({ownerId:ownerId, bids: {$not: {$size: 0}}}).count(cb);
 };
 
-//Item.findPending = function(ownerId, cb){
-//  Item.find({ownerId:ownerId, isAvailble:true
-//};
+Item.findPending = function(ownerId, cb){
+  var pending = [],
+      pubItem = [];
+  Item.collection.find({ownerId:ownerId, isAvailble:true}.toArray(function(err, availableItems){
+    async.map(availableItems, iterator, cb(pending, pubItem));
+  }));
+};
 
 Item.prototype.update = function(fields, files, cb){
   var properties = Object.keys(fields),
@@ -120,3 +125,14 @@ function moveFiles(files, count, relDir){
   return _.compact(tmpPhotos);
 }
 
+function iterator(item, pending, pubItem, cb){
+  Item.collection.findOne({bids:![item._id]}, function(err, bid){
+    if(bid){
+      pending.push(item);
+      cb();
+    }else{
+      pubItem.push(item);
+      cb();
+    }
+  });
+}

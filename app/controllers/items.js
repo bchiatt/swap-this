@@ -81,13 +81,13 @@ exports.offers = function(req, res){
 };
 
 exports.accept = function(req, res){
-  res.locals.user.accept(req.params.itemId, req.params.bidId, function(){
-    res.redirect('/offers');
-  });
+  //res.locals.user.accept(req.params.itemId, req.params.bidId, function(){
+  res.redirect('/offers');
+  //});
 };
 
 exports.reject = function(req, res){
-  res.locals.user.reject(req.params.itemId, req.params.bidId, function(){
-    res.redirect('/offers');
-  });
+  //res.locals.user.reject(req.params.itemId, req.params.bidId, function(){
+  res.redirect('/offers');
+  //});
 };

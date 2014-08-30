@@ -1,7 +1,24 @@
 extends ../shared/template
 block content
-  h2 Swap-de-monium
-  h3 Pending Offers
+  h3 Accepting/Rejecting Offers
+  .row
+    .col-xs-12
+      table
+        thead
+          th Your Items
+          th Bid Items
+          th Response
+        tbody
+          loop for each bid in bids
+          tr
+            td :a(href=/items/:item._id)
+            td :a(href=/items/:bid._id)
+            td
+              a(href='/offers/item._Id/accept/bid._Id') Accept
+              a(href='/offers/item._Id/reject/bid.Id') Reject
+
+
+
 
 block scripts
   script(src='/js/user/itemsIndex.js')
