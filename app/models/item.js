@@ -59,6 +59,9 @@ Item.offerCount = function(userId, cb){
   Item.collection.find({ownerId:ownerId, bids: {$not: {$size: 0}}}).count(cb);
 };
 
+Item.findPending = function(itemId, cb){
+};
+
 Item.prototype.update = function(fields, files, cb){
   var properties = Object.keys(fields),
       self       = this;
@@ -68,7 +71,19 @@ Item.prototype.update = function(fields, files, cb){
   var oldphotos = this.photos,
       newphotos = moveFiles(files, oldphotos.length, '/img/' + this._id);
   this.photos = oldphotos.concat(newphotos);
+  this.isAvailable  = (this.isAvailable==='true') ? true : false;
+  this.tags         = this.tags.trim().split(',').map(function(i){return i.trim();});
   Item.collection.save(this, cb);
+};
+
+Item.prototype.bid = function(itemId, bidId, cb){
+
+};
+
+Item.prototype.accept = function(){
+};
+
+Item.prototype.reject = function(){
 };
 
 Item.toggleIsAvailable = function(){
@@ -83,8 +98,6 @@ function moveFiles(files, count, relDir){
       absDir  = baseDir + relDir;
 
   if(!fs.existsSync(absDir)){fs.mkdirSync(absDir);}
-  console.log('FILES in moveFILES>>>>>  :', files);
-  console.log('FILES.PHOTO in moveFILES>>>>>  :', files.photo);
 
   var tmpPhotos = files.photo.map(function(photo, index){
     if(!photo.size){return;}

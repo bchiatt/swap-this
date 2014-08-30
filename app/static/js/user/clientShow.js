@@ -4,8 +4,8 @@
   'use strict';
 
   $(document).ready(function(){
-    var pos = getPosition();
-    var map = initMap('smallmap', pos.lat, pos.lng, 10);
+    var pos = getPosition(),
+        map = initMap('smallmap', pos.lat, pos.lng, 10);
     addMarker(map, pos.lat, pos.lng, pos.name);
   });
 

@@ -181,40 +181,47 @@ describe('users', function(){
   });*/
 
   describe('get /items', function(){
-    it('should', function(done){
+    it('should show the items index page', function(done){
       request(app)
       .get('/items')
       .set('cookie', cookie)
       .end(function(err, res){
+        expect(res.status).to.equal(200);
+        expect(res.text).to.include('Photo');
+        expect(res.text).to.include('Name');
         done();
       });
     });
   });
 
   describe('get /items/:itemId', function(){
-    it('should', function(done){
+    it('should show the items show page', function(done){
       request(app)
-      .get('/items/:itemId')
+      .get('/items/b00000000000000000000001')
       .set('cookie', cookie)
       .end(function(err, res){
+        expect(res.status).to.equal(200);
+        expect(res.text).to.include('car');
         done();
       });
     });
   });
 
   describe('get /users/:email', function(){
-    it('should', function(done){
+    it('should go to the users show page', function(done){
       request(app)
-      .get('/users/:emal')
+      .get('/users/nodetest@outlook.com')
       .set('cookie', cookie)
       .end(function(err, res){
+        expect(res.status).to.equal(200);
+        expect(res.text).to.include('nodetest@outlook.com');
         done();
       });
     });
   });
-
+//STARTED HERE
   describe('post /messages/:userId', function(){
-    it('should', function(done){
+    it('should redirect to the users show page', function(done){
       request(app)
       .post('/messages/:userId')
       .set('cookie', cookie)
@@ -225,7 +232,7 @@ describe('users', function(){
   });
 
   describe('get /messages/:msgId', function(){
-    it('should', function(done){
+    it('should go to the users message page', function(done){
       request(app)
       .get('/messages/:msgId')
       .set('cookie', cookie)
@@ -236,7 +243,7 @@ describe('users', function(){
   });
 
   describe('get /messages', function(){
-    it('should', function(done){
+    it('should go to the users messages page', function(done){
       request(app)
       .get('/messages')
       .set('cookie', cookie)
@@ -247,8 +254,8 @@ describe('users', function(){
   });
 
   //x2
-  describe('get /item/:itemId/bid', function(){
-    it('should', function(done){
+  describe('get /items/:itemId/bid', function(){
+    it('should go to the item bid page', function(done){
       request(app)
       .get('/items/:itemId/bid')
       .set('cookie', cookie)
@@ -258,8 +265,8 @@ describe('users', function(){
     });
   });
 
-  describe('post /item/:itemId/bid', function(){
-    it('should', function(done){
+  describe('post /items/:itemId/bid', function(){
+    it('should redirect to the item show page', function(done){
       request(app)
       .post('/items/:itemId/bid')
       .set('cookie', cookie)
@@ -270,8 +277,8 @@ describe('users', function(){
   });
 
   //x2
-  describe('get /item/:itemId/offers', function(){
-    it('should', function(done){
+  describe('get /offers', function(){
+    it('should go to the offers page', function(done){
       request(app)
       .get('/items/:itemId/offers')
       .set('cookie', cookie)
@@ -282,7 +289,7 @@ describe('users', function(){
   });
 
   describe('post /offers/:itemId/accept/:bidId/', function(){
-    it('should', function(done){
+    it('should redirect to the offers page', function(done){
       request(app)
       .post('/items/:itemId/offers/:itemId2/accept')
       .set('cookie', cookie)
@@ -293,7 +300,7 @@ describe('users', function(){
   });
 
   describe('post /offers/:itemId/reject/:bidId/', function(){
-    it('should', function(done){
+    it('should redirect to the offers page', function(done){
       request(app)
       .post('/items/:itemId/offers/:itemId2/reject')
       .set('cookie', cookie)

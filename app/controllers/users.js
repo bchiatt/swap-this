@@ -61,7 +61,9 @@ exports.update = function(req, res){
 
 exports.home = function(req, res){
   Item.find({ownerId:res.locals.user._id, isAvailable:true}, function(err, pubItems){
+    console.log('pubItems in exports.home>>>>> ', pubItems);
     Item.find({ownerId:res.locals.user._id, isAvailable:false}, function(err, privItems){
+      console.log('privItems in exports.home>>>>> ', privItems);
       res.render('users/home', {pubItems:pubItems, privItems:privItems});
     });
   });
@@ -80,7 +82,7 @@ exports.client = function(req, res){
     if(client){
       res.render('users/client', {client:client});
     }else{
-      res.redirect('/users');
+      res.redirect('/profile');
     }
   });
 };

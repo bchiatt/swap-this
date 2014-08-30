@@ -7,11 +7,11 @@ block content
       form(role='form', method='post', enctype='multipart/form-data')
         .radio
           label
-            input(type='radio', name='isAvailable', checked='#{item.isAvailable}')
+            input(type='radio', name='isAvailable', value='true', checked=item.isAvailable)
             span Available for Sale
         .radio
           label
-            input(type='radio' name='isAvailable' checked='#{item.isAvailable}')
+            input(type='radio' name='isAvailable', value='false', checked=!item.isAvailable)
             span Not for Sale
         .form-group
           label(for='nameItem') Name of Item

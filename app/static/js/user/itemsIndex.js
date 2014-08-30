@@ -1,13 +1,11 @@
-/* global _, getPositions, initMap, addMarker */
+/* global _, initMap, addMarker */
 
 (function(){
   'use strict';
 
-  var map, marker;
-
   $(document).ready(function(){
-    var locations = getPositions();
-    map = initMap('bigmap', 39.5, -98.35, 4);
+    var locations = getPositions(),
+         map      = initMap('bigmap', 39.5, -98.35, 4);
 
     locations.forEach(function(loc){
       addMarker(map, loc.lat, loc.lng, loc.name);

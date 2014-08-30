@@ -110,9 +110,6 @@ function sendInternal(from, to, subject, message, cb){
 function uploadPhoto(photo, relDir){
   var baseDir = __dirname + '/../static',
       absDir  = baseDir + relDir;
-  console.log('BASEDIR in upload file', baseDir);
-  console.log('ABSDIR in upload file', absDir);
-  console.log('PHOTO[0].PATH IN UPLOAD FILE', photo.photo[0].path);
 
   if(!fs.existsSync(absDir)){fs.mkdirSync(absDir);}
 

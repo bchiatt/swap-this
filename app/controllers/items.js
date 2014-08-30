@@ -11,7 +11,6 @@ exports.new = function(req, res){
 exports.create = function(req, res){
   var form = new mp.Form();
   form.parse(req, function(err, fields, files){
-    console.log('THIS IS FIELDS & FILES', fields, files);
     Item.create(res.locals.user._id, fields, files, function(){
       res.redirect('/profile');
     });
@@ -19,10 +18,10 @@ exports.create = function(req, res){
 };
 
 exports.index = function(req, res){
-  Item.query(req.query, function(err, items){
+  console.log('THIS IS req.query in exports.index>>>>> ', req.query);
+  Item.find({isAvailable:true}, function(err, items){
     User.getLocations(function(err, locations){
       console.log('THIS IS ITEMS', items);
-      console.log('THIS IS LOCATIONS', locations);
       res.render('items/index', {items:items, locations:locations});
     });
   });
