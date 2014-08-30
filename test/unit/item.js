@@ -1,7 +1,7 @@
 /* jshint expr:true */
 /* global describe, it, before, beforeEach */
 
-'use strict';
+/*'use strict';
 
 var expect    = require('chai').expect,
     Mongo     = require('mongodb'),
@@ -32,7 +32,7 @@ describe('Item', function(){
       Item.create(ownerId, fields, files, function(err, item){
         expect(item._id).to.be.instanceof(Mongo.ObjectID);
         expect(item.tags).to.have.length(2);
-        expect(item.isAvailable)to.be.true;
+        expect(item.isAvailable).to.be.true;
       });
     });
   });
@@ -65,23 +65,19 @@ describe('Item', function(){
     });
   });*/
 
-  describe('#save', function(){
+ /*describe('#save', function(){
     it('should save an item', function(done){
       var ownerId = '000000000000000000000001',
           fields  = {name:'car', description:'1990 Toyota Corolla', tags:'0'},
           files   = {};
-        item.save(fields, files, function(err, item){
-          User.findById('b00000000000000000000001', function(err, item){
-            expect(item.name).to.equal('car');
-            done();
-          });
+      item.save(fields, files, function(err, item){
+        User.findById('b00000000000000000000001', function(err, item){
+          expect(item.name).to.equal('car');
+          done();
         });
       });
     });
   });
 
-
-
-
 }); //final close
-
+*/

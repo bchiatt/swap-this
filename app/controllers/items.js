@@ -32,3 +32,37 @@ exports.show = function(req, res){
     });
   });
 };
+
+exports.newBid = function(req, res){
+  Item.findById(req.params.itemId, function(err, item){
+    Item.findBids(res.locals.user._id, function(err, bids){
+      res.render('items/bid', {item:item, bids:bids});
+    });
+  });
+};
+
+exports.bid = function(req, res){
+  res.locals.user.bid(req.params.itemId, req.params.bidId, function(){
+    res.redirect('/items/' + req.params.itemId);
+  });
+};
+
+exports.offers = function(req, res){
+  Item.findPending(req.params.itemId, function(err, saleItem){
+    Item.findById(req.params.itemId2, function(err, bidItem){
+      res.render('items/offers', {saleItem:saleItem, bidItem:bidItem});
+    });
+  });
+};
+
+exports.accept = function(req, res){
+  res.locals.user.accept(req.params.itemId, req.params.bidId, function(){
+    res.redirect('/offers');
+  });
+};
+
+exports.reject = function(req, res){
+  res.locals.user.reject(req.params.itemId, req.params.bidId, function(){
+    res.redirect('/offers');
+  });
+};

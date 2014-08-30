@@ -1,7 +1,7 @@
 /* jshint expr:true */
 /* global describe, it, before, beforeEach */
 
-'use strict';
+/*'use strict';
 
 var expect    = require('chai').expect,
     Mongo     = require('mongodb'),
@@ -123,4 +123,4 @@ describe('User', function(){
 
 
 }); //final close
-
+*/

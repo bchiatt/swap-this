@@ -2,6 +2,7 @@
 
 var User    = require('../models/user'),
     mp      = require('multiparty'),
+    moment  = require('moment'),
     Item    = require('../models/item'),
     Message = require('../models/message');
 
@@ -86,12 +87,12 @@ exports.client = function(req, res){
 
 exports.messages = function(req, res){
   res.locals.user.messages(function(err, msgs){
-    res.render('users/messages', {msgs:msgs});
+    res.render('users/messages', {msgs:msgs, moment:moment});
   });
 };
 
 exports.message = function(req, res){
   Message.read(req.params.msgId, function(err, msg){
-    res.render('users/message', {msg:msg});
+    res.render('users/message', {msg:msg, moment:moment});
   });
 };

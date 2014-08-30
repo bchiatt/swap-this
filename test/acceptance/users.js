@@ -140,10 +140,11 @@ describe('users', function(){
     });
   });
 
-  describe('post /profile', function(){
+  /*describe('post /profile', function(){
     it('should redirect to the profile page', function(done){
       request(app)
       .post('/profile')
+      .send('email=bob%40aol.com')
       .set('cookie', cookie)
       .end(function(err, res){
         expect(res.status).to.equal(302);
@@ -151,7 +152,7 @@ describe('users', function(){
         done();
       });
     });
-  });
+  });*/
 
   describe('get items/new', function(){
     it('should display the add item page', function(done){
@@ -167,5 +168,140 @@ describe('users', function(){
       });
     });
   });
+
+  /*describe('post /items', function(){
+    it('should', function(done){
+      request(app)
+      .post('/items')
+      .set('cookie', cookie)
+      .end(function(err, res){
+        done();
+      });
+    });
+  });*/
+
+  describe('get /items', function(){
+    it('should', function(done){
+      request(app)
+      .get('/items')
+      .set('cookie', cookie)
+      .end(function(err, res){
+        done();
+      });
+    });
+  });
+
+  describe('get /items/:itemId', function(){
+    it('should', function(done){
+      request(app)
+      .get('/items/:itemId')
+      .set('cookie', cookie)
+      .end(function(err, res){
+        done();
+      });
+    });
+  });
+
+  describe('get /users/:email', function(){
+    it('should', function(done){
+      request(app)
+      .get('/users/:emal')
+      .set('cookie', cookie)
+      .end(function(err, res){
+        done();
+      });
+    });
+  });
+
+  describe('post /messages/:userId', function(){
+    it('should', function(done){
+      request(app)
+      .post('/messages/:userId')
+      .set('cookie', cookie)
+      .end(function(err, res){
+        done();
+      });
+    });
+  });
+
+  describe('get /messages/:msgId', function(){
+    it('should', function(done){
+      request(app)
+      .get('/messages/:msgId')
+      .set('cookie', cookie)
+      .end(function(err, res){
+        done();
+      });
+    });
+  });
+
+  describe('get /messages', function(){
+    it('should', function(done){
+      request(app)
+      .get('/messages')
+      .set('cookie', cookie)
+      .end(function(err, res){
+        done();
+      });
+    });
+  });
+
+  //x2
+  describe('get /item/:itemId/bid', function(){
+    it('should', function(done){
+      request(app)
+      .get('/items/:itemId/bid')
+      .set('cookie', cookie)
+      .end(function(err, res){
+        done();
+      });
+    });
+  });
+
+  describe('post /item/:itemId/bid', function(){
+    it('should', function(done){
+      request(app)
+      .post('/items/:itemId/bid')
+      .set('cookie', cookie)
+      .end(function(err, res){
+        done();
+      });
+    });
+  });
+
+  //x2
+  describe('get /item/:itemId/offers', function(){
+    it('should', function(done){
+      request(app)
+      .get('/items/:itemId/offers')
+      .set('cookie', cookie)
+      .end(function(err, res){
+        done();
+      });
+    });
+  });
+
+  describe('post /offers/:itemId/accept/:bidId/', function(){
+    it('should', function(done){
+      request(app)
+      .post('/items/:itemId/offers/:itemId2/accept')
+      .set('cookie', cookie)
+      .end(function(err, res){
+        done();
+      });
+    });
+  });
+
+  describe('post /offers/:itemId/reject/:bidId/', function(){
+    it('should', function(done){
+      request(app)
+      .post('/items/:itemId/offers/:itemId2/reject')
+      .set('cookie', cookie)
+      .end(function(err, res){
+        done();
+      });
+    });
+  });
+
 });
 
