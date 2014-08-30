@@ -1,24 +1,17 @@
 extends ../shared/template
 block content
-  h2 Edit Profile
+  h2 BID ITEM
   .row
     .col-xs-4.col-xs-offset-4
-      form(role='form', method='post', action='/profile', enctype='multipart/form-data')
+      form(role='form', method='post', action='/items/#{item._d}/bid')
         .form-group
-          label(for='email') Email
-          input.form-control#email(type='email', name='email', value=user.email, autofocus=true)
+          label(for='item') To Get That:
+          input.form-control#item(type='text', value=item.name, readonly)
         .form-group
-          label(for='location') Location
-          input.form-control#location(type='text', name='location', value=user.location)
-          input.form-control#lat(type='hidden', name='lat')
-          input.form-control#lng(type='hidden', name='lng')
-        .form-group
-          label(for='phone') Phone
-          input.form-control#phone(type='tel', name='phone', value=user.phone)
-        .form-group
-          label(for='photo') Photo
-         input.form-control#photo(type='file', name='photo')
-        br
+          label(for='offer') I'll Give This:
+          select.form-control#offer(name='offer')
+            each bid in bids
+              option(value=bid._id)= bid.name
 
         button.btn.btn-success(type='submit') Submit
 
