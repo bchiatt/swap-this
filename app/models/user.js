@@ -3,7 +3,7 @@
 var bcrypt  = require('bcrypt'),
     Mongo   = require('mongodb'),
     _       = require('lodash'),
-    Mailgun = require('mailgun'),
+    Mailgun = require('mailgun-js'),
     Message = require('./message.js');
 
 function User(){
@@ -60,7 +60,7 @@ User.prototype.send = function(receiver, obj, cb){
       sendEmail(this.email, receiver.email, obj.subject, obj.message, cb);
       break;
     case 'internal':
-      sendInternal(this, receiver._id, obj.subject, cb);
+      sendInternal(this._id, receiver._id, obj.subject, obj.message, cb);
       break;
   }
 };
@@ -94,13 +94,13 @@ function sendText(to, body, cb){
 function sendEmail(from, to, subject, html, cb){
   if(!to){return cb();}
 
-  var mailgun = new Mailgun({apiKey:process.enf.MGKEY, domain:process.env.MGDOM}),
+  var mailgun = new Mailgun({apiKey:process.env.MGAPI, domain:process.env.MGDOM}),
       data    = {from:from, to:to, subject:subject, html:html};
 
   mailgun.messages().send(data, cb);
 }
 
 function sendInternal(from, to, subject, message, cb){
-  var msg = new Message({from:from, toId:to, subject:subject, body:message});
+  var msg = new Message({frId:from, toId:to, subject:subject, body:message});
   msg.save(cb);
 }

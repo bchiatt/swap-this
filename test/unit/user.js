@@ -4,6 +4,7 @@
 'use strict';
 
 var expect    = require('chai').expect,
+    Mongo     = require('mongodb'),
     User      = require('../../app/models/user'),
     Message   = require('../../app/models/message'),
     dbConnect = require('../../app/lib/mongodb'),
@@ -97,8 +98,8 @@ describe('User', function(){
       User.findById('000000000000000000000001', function(err, sender){
         User.findById('000000000000000000000003', function(err, receiver){
           sender.send(receiver, {mtype:'internal', subject:'hello', message:'whazup'}, function(err, response){
-            Message.find({toId:'000000000000000000000003'}, function(err, messages){
-              expect(messages).to.have.length(0);
+            Message.find({receiverId:Mongo.ObjectID('000000000000000000000003')}, function(err, messages){
+              expect(messages).to.have.length(3);
               done();
             });
           });

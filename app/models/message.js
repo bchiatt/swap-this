@@ -3,13 +3,23 @@
 var async = require('async'),
     Mongo = require('mongodb');
 
-function Message(senderId, receiverId, message){
-  this.senderId   = senderId;
-  this.receiverId = receiverId;
-  this.message    = message;
+function Message(o){
+  this.senderId   = Mongo.ObjectID(o.frId);
+  this.receiverId = Mongo.ObjectID(o.toId);
+  this.subject    = o.subject;
+  this.message    = o.object;
   this.date       = new Date();
   this.isRead     = false;
 }
+
+
+/*function Message(senderId, receiverId, message){
+  this.senderId   = senderId;
+  this.receiverId = receiverId;
+  this.message    = message.object;
+  this.date       = new Date();
+  this.isRead     = false;
+}*/
 
 Object.defineProperty(Message, 'collection', {
   get: function(){return global.mongodb.collection('messages');}
@@ -36,13 +46,16 @@ Message.prototype.save = function(cb){
 };
 
 Message.unread = function(receiverId, cb){
+  receiverId = Mongo.ObjectID(receiverId);
   Message.collection.find({receiverId:receiverId, isRead:false}).count(cb);
 };
 
 Message.messages = function(receiverId, cb){
-  Message.collection.find({receiverId:receiverId}).sort({date:-1}).toArray(function(err, msgs){
-    async.map(msgs, iterator, cb);
-  });
+  receiverId = Mongo.ObjectID(receiverId);
+  Message.collection.find({receiverId:receiverId}).sort({date:-1}).toArray(cb);
+  //Message.collection.find({receiverId:receiverId}).sort({date:-1}).toArray(function(err, msgs){
+   // async.map(msgs, iterator, cb);
+  //});
 };
 
 module.exports = Message;
@@ -50,6 +63,7 @@ module.exports = Message;
 function iterator(msg, cb){
   require('./user').findById(msg.senderId, function(err, sender){
     msg.sender = sender;
+    console.log('i\'m in the iterator', msg);
     cb(null, msg);
   });
 }
