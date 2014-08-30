@@ -63,8 +63,8 @@ User.prototype.save = function(fields, file, cb){
 
 // PRIVATE FUNCTIONS //
 
-User.prototype.send = function(receiver, obj, cb){
-  sendInternal(this._id, receiver._id, obj.subject, obj.message, cb);
+User.prototype.send = function(receiver, message, cb){
+  sendInternal(this._id, receiver._id, message, cb);
 };
 
 //we don't need this if we keep the switch statement above

@@ -6,7 +6,8 @@ var async = require('async'),
 function Message(senderId, receiverId, message){
   this.senderId   = senderId;
   this.receiverId = receiverId;
-  this.message    = message.object;
+  this.subject    = message.subject;
+  this.message    = message.body;
   this.date       = new Date();
   this.isRead     = false;
 }

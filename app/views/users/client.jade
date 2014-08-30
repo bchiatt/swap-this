@@ -1,10 +1,10 @@
-exports ../shared/template
+extends ../shared/template
 block content
   h2 Client Page
   .row
     .col-xs-12
-      h2 client.email
-      h5 client.location
+      h2=client.email
+      h5=client.location
   .row
     .col-xs-2
       a.thumbnail(href='#{user.photo}')
@@ -12,17 +12,16 @@ block content
     .col-xs-4
       .panel.panel-default
         .panel-body
-          form(role='form', method='post', action='/messages/#{client.id}')
+          form.form(role='form', method='post', action='/messages/#{client._id}')
             .row
               .col-xs-6
-                .radio
-                  label
-                    input(type='radio' name='mytpe' value='internal')
-                    span Internal
               .col-xs-6
                 .form-group
-                  label(for='message') Message
-                  textarea.form-control#message(name='message')
+                  label(for='subject') Subject
+                  input.form-control#subject(name='subject', type='text')
+                .form-group
+                  label(for='body') Message
+                  textarea.form-control#body(name='body')
                 .form-group
                   button.btn.btn-info.btn-sm(type='submit') Send Message
   .row

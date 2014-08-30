@@ -21,7 +21,9 @@
               li
                 a(href='/profile') View Profile
                 a(href='/profile/edit') Edit Profile
-          li: a(href='/messages') Messages
+          li: a(href='/messages')
+            span Messages &nbsp;
+            span.badge= user.unread
           li
             form.navbar-form(method='post', action='/logout')
               .form-group
