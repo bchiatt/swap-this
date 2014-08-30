@@ -69,7 +69,7 @@ exports.home = function(req, res){
 
 exports.send = function(req, res){
   User.findById(req.params.userId, function(err, receiver){
-    res.locals.user.send(receiver, req.body, function(){
+    Message.send(res.locals.user._id, receiver._id, req.body, function(){
       res.redirect('/users/' + receiver.email);
     });
   });
