@@ -52,10 +52,9 @@ Message.unread = function(receiverId, cb){
 
 Message.messages = function(receiverId, cb){
   receiverId = Mongo.ObjectID(receiverId);
-  Message.collection.find({receiverId:receiverId}).sort({date:-1}).toArray(cb);
-  //Message.collection.find({receiverId:receiverId}).sort({date:-1}).toArray(function(err, msgs){
-   // async.map(msgs, iterator, cb);
-  //});
+  Message.collection.find({receiverId:receiverId}).sort({date:-1}).toArray(function(err, msgs){
+    async.map(msgs, iterator, cb);
+  });
 };
 
 module.exports = Message;
@@ -63,7 +62,6 @@ module.exports = Message;
 function iterator(msg, cb){
   require('./user').findById(msg.senderId, function(err, sender){
     msg.sender = sender;
-    console.log('i\'m in the iterator', msg);
     cb(null, msg);
   });
 }
