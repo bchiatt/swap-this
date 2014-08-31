@@ -60,12 +60,25 @@ Item.offerCount = function(userId, cb){
   Item.collection.find({ownerId:ownerId, bids: {$not: {$size: 0}}}).count(cb);
 };
 
-Item.findPending = function(ownerId, cb){
+/*Item.findPending = function(ownerId, cb){
   console.log('ownerId in Item.findPending>>>> ', ownerId);
   var pending = [],
       pubItem = [];
   Item.collection.find({ownerId:ownerId, isAvailble:true}).toArray(function(err, availableItems){
     async.map(availableItems, iterator, cb(pending, pubItem));
+  });
+};*/
+
+Item.findOffers = function(ownerId, cb){
+  Item.collection.find({ownerId:ownerId, bids: {$not: {$size: 0}}}).toArray(function(err, pending){
+    async.map(pending, function(pend, cb){
+      async.map(pend.bids, function(bid, cb){
+        Item.findById(bid, function(err, item){
+          pend = {pend:pend, item:item};
+          cb(err, pend);
+        });
+      }, cb);
+    }, cb);
   });
 };
 
@@ -130,7 +143,7 @@ function moveFiles(files, count, relDir){
   return _.compact(tmpPhotos);
 }
 
-function iterator(item, pending, pubItem, cb){
+/*function iterator(item, pending, pubItem, cb){
   Item.collection.findOne({bids:![item._id]}, function(err, bid){
     if(bid){
       pending.push(item);
@@ -140,4 +153,4 @@ function iterator(item, pending, pubItem, cb){
       cb();
     }
   });
-}
+}*/

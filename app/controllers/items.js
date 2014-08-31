@@ -73,10 +73,9 @@ exports.update = function(req, res){
 };
 
 exports.offers = function(req, res){
-  Item.findPending(req.params.itemId, function(err, saleItem){
-    Item.findById(req.params.itemId2, function(err, bidItem){
-      res.render('items/offers' , {saleItem:saleItem, bidItem:bidItem});
-    });
+  Item.findOffers(res.locals.user._id, function(err, pendOffers){
+    console.log('pending offers >>>>>>>>', pendOffers);
+    res.render('items/offers', {pendOffers:pendOffers});
   });
 };
 

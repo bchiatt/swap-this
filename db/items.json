@@ -4,7 +4,10 @@
     "description"   : "1990 Toyota Corolla",
     "ownerId"       : {"$oid":"000000000000000000000001"},
     "isAvailable"   : true,
-    "bids"          : [],
+    "bids"          : [
+      "b00000000000000000000004",
+      "b00000000000000000000005"
+    ],
     "tags"          : ["car", "blue"],
     "photos"        : ["/img/undefined/0.jpg", "car.jpg"]
 }

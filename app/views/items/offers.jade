@@ -1,6 +1,6 @@
 extends ../shared/template
 block content
-  h3 Take it or Leave It
+  h3 Accepting/Rejecting Offers
   .row
     .col-xs-9.col-xs-offset-3
       table
@@ -9,13 +9,14 @@ block content
           th Bid Items
           th Response
         tbody
-          loop for each bid in item.bids
-          tr
-            td :a(href=/items/:item._id)
-            td :a(href=/items/:bid._id)
-            td
-              a(href='/offers/item._Id/accept/bid._Id') Accept
-              a(href='/offers/item._Id/reject/bid.Id') Reject
+          each array1 in pendOffers
+            each offer in array1
+              tr
+                td : a(href='/items/pend._id')=pend.name
+                td : a(href='/items/item._id')=item.name
+                td
+                  a(href='/offers/item._Id/accept/bid._Id') Accept
+                  a(href='/offers/item._Id/reject/bid.Id') Reject
 
 
 
