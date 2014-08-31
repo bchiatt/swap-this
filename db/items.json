@@ -1,49 +1,50 @@
 
 {
-    "_id"           : {"$oid":"i00000000000000000000001"},
+    "_id"           : {"$oid":"b00000000000000000000001"},
     "name"          : "car",
-    "photo"         : "car.png",
     "description"   : "1990 Toyota Corolla",
     "ownerId"       : {"$oid":"000000000000000000000001"},
-    "isAvailable"   : true
+    "isAvailable"   : true,
+    "tags"          : ["car", "blue"],
+    "photos"        : ["/img/undefined/0.jpg", "car.jpg"]
 }
 {
-    "_id"           : {"$oid":"i00000000000000000000002"},
+    "_id"           : {"$oid":"b00000000000000000000002"},
     "name"          : "house",
-    "photo"         : "house.png",
     "description"   : "4 br, 2 bath, 1970",
     "ownerId"       : {"$oid":"000000000000000000000001"},
-    "isAvailable"   : false
+    "isAvailable"   : false,
+    "photos"        : ["house.png"]
 }
 {
-    "_id"           : {"$oid":"i00000000000000000000003"},
+    "_id"           : {"$oid":"b00000000000000000000003"},
     "name"          : "bottle of wine",
-    "photo"         : "wine.png",
     "description"   : "cabernet-merlot blend, 2014",
     "ownerId"       : {"$oid":"000000000000000000000002"},
-    "isAvailable"   : true
+    "isAvailable"   : true,
+    "photo"         : ["wine.png"]
 }
 {
-    "_id"           : {"$oid":"i00000000000000000000004"},
+    "_id"           : {"$oid":"b00000000000000000000004"},
     "name"          : "baby",
-    "photo"         : "baby.png",
     "description"   : "happy, nine months old",
     "ownerId"       : {"$oid":"000000000000000000000002"},
-    "isAvailable"   : false
+    "isAvailable"   : false,
+    "photo"         : ["baby.png"]
 }
 {
-    "_id"           : {"$oid":"i00000000000000000000005"},
+    "_id"           : {"$oid":"b00000000000000000000005"},
     "name"          : "piano",
-    "photo"         : "piano.png",
     "description"   : "Yamaha upright",
     "ownerId"       : {"$oid":"000000000000000000000003"},
-    "isAvailable"   : true
+    "isAvailable"   : true,
+    "photo"         : ["piano.png"]
 }
 {
-    "_id"           : {"$oid":"i00000000000000000000006"},
+    "_id"           : {"$oid":"b00000000000000000000006"},
     "name"          : "table",
-    "photo"         : "table.png",
     "description"   : "dark brown rectangle, 6 chairs",
     "ownerId"       : {"$oid":"000000000000000000000003"},
-    "isAvailable"   : true
+    "isAvailable"   : true,
+    "photo"         : ["table.png"]
 }

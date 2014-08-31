@@ -1,34 +1,21 @@
 extends ../shared/template
 block content
-  h2 Profile Page
-  .row
+  h2 Item Page
+  h2 Owner: #{client.email}
+  .row#location(data-location= client.location, data-lat= client.lat, data-lng= client.lng)
     .col-xs-12
-      h2: a(href'/profile/edit')= user.email
-      h4= user.location
+      h2: a(href'/profile/edit')= client.email
+      h4= client.location
   .row
     .col-xs-3
-      a.thumbnail(href='#{user.photo}')
-        img(src=user.photo)
+      a.thumbnail#itemShow(style='background-image:url(#{item.photos[0]});')
     .col-xs-3
       #smallmap
     .col-xs-3
   .row
-    h1 Available
+    h1= item.name
     .col-xs-4
-      table.table.table-striped.table-hover.table-bordered
-        thead
-          th Name
-          th Photo
-          th Description
-        tbody
-          each item in items
-            tr
-              td= item.name
-              td: img(src='#{item.photo}')
-              td= item.description
     .col-xs-4
-      h1 Not Available
-        this will loop through each itemphoto in user.itemsphoto(!isAvailable) testing this out
     .col-xs-4
 
 block scripts

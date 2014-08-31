@@ -59,7 +59,11 @@ exports.update = function(req, res){
 };
 
 exports.home = function(req, res){
-  res.render('users/home');
+  Item.find({ownerId:res.locals.user._id, isAvailable:true}, function(err, pubItems){
+    Item.find({ownerId:res.locals.user._id, isAvailable:false}, function(err, privItems){
+      res.render('users/home', {pubItems:pubItems, privItems:privItems});
+    });
+  });
 };
 
 exports.send = function(req, res){
@@ -67,6 +71,16 @@ exports.send = function(req, res){
     res.locals.user.send(receiver, req.body, function(){
       res.redirect('/users/' + receiver.email);
     });
+  });
+};
+
+exports.client = function(req, res){
+  User.findOne({email:req.params.email}, function(err, client){
+    if(client){
+      res.render('users/client', {client:client});
+    }else{
+      res.redirect('/users');
+    }
   });
 };
 

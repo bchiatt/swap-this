@@ -5,13 +5,13 @@
 
 var expect    = require('chai').expect,
     Mongo     = require('mongodb'),
-    User      = require('../../app/models/user'),
+    Item      = require('../../app/models/item'),
     Message   = require('../../app/models/message'),
     dbConnect = require('../../app/lib/mongodb'),
     cp        = require('child_process'),
     db        = 'swap-test';
 
-describe('User', function(){
+describe('Item', function(){
   before(function(done){
     dbConnect(db, function(){
       done();
@@ -24,96 +24,57 @@ describe('User', function(){
     });
   });
 
-  describe('constructor', function(){
-    it('should create a new User object', function(){
-      var u = new User();
-      expect(u).to.be.instanceof(User);
-    });
-  });
-
-  describe('.findOne', function(){
-    it('should find a specific user', function(done){
-      User.findOne({email:'bob@aol.com'}, function(err, user){
-        expect(user.email).to.equal('bob@aol.com');
-        done();
+  describe('.create', function(){
+    it('should create a new Item object', function(){
+      var ownerId = '000000000000000000000001',
+          fields  = {name:'car', description:'1990 Toyota Corolla', tags:'car, blue'},
+          files   = {};
+      Item.create(ownerId, fields, files, function(err, item){
+        expect(item._id).to.be.instanceof(Mongo.ObjectID);
+        expect(item.tags).to.have.length(2);
+        expect(item.isAvailable)to.be.true;
       });
     });
   });
 
-  describe('.register', function(){
-    it('should register a user', function(done){
-      var user = {email:'larry@gmail.com', password:'1234'};
-      User.register(user, function(err, user){
-        expect(user.email).to.equal('larry@gmail.com');
-        done();
+  describe('.findById', function(){
+    it('should find one item by id', function(done){
+      Item.findById('b00000000000000000000001', function(err, item){
+        expect(item.name).to.equal('car');
+        expect(item).to.be.instanceof(Item);
       });
     });
-    it('should not register a user', function(done){
-      var user = {email:'bob@aol.com', password:'1234'};
-      User.register(user, function(err, user){
-        expect(user).to.not.be.ok;
+  });
+
+  describe('.find', function(){
+    it('should find a specific item', function(done){
+      var ownerId = '000000000000000000000001',
+          fields  = {name:'car', description:'1990 Toyota Corolla', tags:'0'},
+          files   = {};
+      Item.find({name:'car'}, function(err, item){
+        console.log(item);
+        expect(item.description).to.equal('1990 Toyota Corolla');
         done();
       });
     });
   });
+
+  /*describe('.query', function(){
+    it('', function(){
+
+    });
+  });*/
 
   describe('#save', function(){
-    it('should save a user', function(done){
-      var body = {phone:'111-2222'};
-      User.findById('000000000000000000000001', function(err, user){
-        user.save(body, function(err, user, c){
-          User.findById('000000000000000000000001', function(err, user){
-            expect(user.phone).to.equal('111-2222');
+    it('should save an item', function(done){
+      var ownerId = '000000000000000000000001',
+          fields  = {name:'car', description:'1990 Toyota Corolla', tags:'0'},
+          files   = {};
+        item.save(fields, files, function(err, item){
+          User.findById('b00000000000000000000001', function(err, item){
+            expect(item.name).to.equal('car');
             done();
           });
-        });
-      });
-    });
-  });
-
-  describe('#send', function(){
-    it('should send a text message to a user', function(done){
-      User.findById('000000000000000000000001', function(err, sender){
-        User.findById('000000000000000000000002', function(err, receiver){
-          sender.send(receiver, {mtype:'text', message:'hello'}, function(err, response){
-            expect(response.sid).to.be.ok;
-            done();
-          });
-        });
-      });
-    });
-
-    it('should send an email to a user', function(done){
-      User.findById('000000000000000000000001', function(err, sender){
-        User.findById('000000000000000000000003', function(err, receiver){
-          sender.send(receiver, {mtype:'email', subject:'hello', message:'whazup'}, function(err, response){
-            expect(response.id).to.be.ok;
-            done();
-          });
-        });
-      });
-    });
-
-    it('should send an internal message to a user', function(done){
-      User.findById('000000000000000000000001', function(err, sender){
-        User.findById('000000000000000000000003', function(err, receiver){
-          sender.send(receiver, {mtype:'internal', subject:'hello', message:'whazup'}, function(err, response){
-            Message.find({receiverId:Mongo.ObjectID('000000000000000000000003')}, function(err, messages){
-              expect(messages).to.have.length(3);
-              done();
-            });
-          });
-        });
-      });
-    });
-  });
-  //I'm not sure how we test for messages - I entered 2 based off Brian's test for FB
-  describe('#messages', function(){
-    it('should show all user messages', function(done){
-      User.findById('000000000000000000000003', function(err, client){
-        client.messages(function(err, messages){
-          expect(messages).to.have.length(2);
-          done();
         });
       });
     });

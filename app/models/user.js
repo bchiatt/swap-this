@@ -5,7 +5,7 @@ var bcrypt  = require('bcrypt'),
     _       = require('lodash'),
     fs      = require('fs'),
     path    = require('path'),
-    Mailgun = require('mailgun-js'),
+//    Mailgun = require('mailgun-js'),
     Message = require('./message.js');
 
 function User(){
@@ -59,19 +59,9 @@ User.prototype.save = function(fields, file, cb){
 
 // PRIVATE FUNCTIONS //
 
-//User.prototype.send = function(receiver, obj, cb){
-//  switch(obj.mtype){
-//    case 'text':
-//      sendText(receiver.phone, obj.message, cb);
-//      break;
-//    case 'email':
-//      sendEmail(this.email, receiver.email, obj.subject, obj.message, cb);
-//      break;
-//    case 'internal':
-//      sendInternal(this._id, receiver._id, obj.subject, obj.message, cb);
-//      break;
-//  }
-//};
+User.prototype.send = function(receiver, obj, cb){
+  sendInternal(this._id, receiver._id, obj.subject, obj.message, cb);
+};
 
 //we don't need this if we keep the switch statement above
 
