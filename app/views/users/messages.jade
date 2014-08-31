@@ -19,10 +19,10 @@ block content
             tr
               td
                 span.glyphicon(class=(!message.isRead === true ? 'glyphicon-envelope' : 'glyphicon-ok'))
-              td: a(href='/messages/#{message._id}')= message.sender.email
+              td: a(href='/messages/#{message._id}')= message.from
               td=moment(message.sent).format('DD MMM, YYYY')
               td=message.subject
-              td: a(href='/messages/#{message._id}')= message.message.slice(0, 10) + ' ...'
+              td: a(href='/messages/#{message._id}')= message.body.slice(0, 10) + ' ...'
 
         .col-xs-2
 

@@ -64,9 +64,9 @@ Item.findPending = function(ownerId, cb){
   console.log('ownerId in Item.findPending>>>> ', ownerId);
   var pending = [],
       pubItem = [];
-  Item.collection.find({ownerId:ownerId, isAvailble:true}.toArray(function(err, availableItems){
+  Item.collection.find({ownerId:ownerId, isAvailble:true}).toArray(function(err, availableItems){
     async.map(availableItems, iterator, cb(pending, pubItem));
-  }));
+  });
 };
 
 Item.prototype.update = function(fields, files, cb){
@@ -97,7 +97,7 @@ Item.prototype.accept = function(bidItem, cb){
   var winner = bidItem.ownerId;
   bidItem.ownerId = this.ownerId;
   this.ownerId = winner;
-  Item.collection.save(this, function(err,cb){
+  Item.collection.save(this, function(){
     Item.collection.save(bidItem, cb);
   });
 };
