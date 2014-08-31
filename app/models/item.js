@@ -84,7 +84,7 @@ Item.prototype.update = function(fields, files, cb){
 };
 
 Item.prototype.bid = function(bidId, cb){
-  this.bids.push(bidId);
+  this.bids.push(bidId._id);
   Item.collection.save(this, cb);
 };
 

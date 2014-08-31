@@ -5,14 +5,15 @@ block content
     .col-xs-4.col-xs-offset-4
       form(role='form', method='post', action='/items/#{item._id}/bid')
         .form-group
-          label(for='item') To Get That:
-          input.form-control#item(type='text', value=item.name, readonly)
-        .form-group
           label(for='offer') I'll Give This:
           select.form-control#offer(name='offer')
             each bid in bids
               option(value=bid._id)= bid.name
-        button.btn.btn-success(type='submit') Submit
+        .form-group
+          label(for='item') To Get That:
+          input.form-control#item(type='text', value=item.name, readonly)
+
+        button.btn.btn-success(type='submit') SWOFFER!
 
 block scripts
   script(src='/js/user/update.js')

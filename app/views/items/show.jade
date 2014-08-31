@@ -12,10 +12,7 @@ block content
         .photo.thumbnail#itemPhotos(style='background-image:url(#{photo});')
   .row
     .col-xs-5.col-xs-offset-1
-      form.navbar-form(method='get', action='/items/#{item._id}/bid')
-        .form-group
-          input(type='hidden')
-          button#bid.btn.btn-danger.btn-lg Bid on Item!
+      a.btn.btn-danger.btn-lg(href='/items/#{item._id}/bid') MAKE SWOFFER!
     .col-xs-6
       h2 Description
         p= item.description

@@ -47,13 +47,12 @@ exports.newBid = function(req, res){
 
 exports.bid = function(req, res){
   Item.findById(req.params.itemId, function(err, forSale){
-    console.log('forSale in exports.bid>>>>>>', forSale);
-    console.log('req.params.bidId in exports.bid>>>>>>', req.params.bidId);
-    Item.findById(req.params.bidId, function(err, bidItem){
-      forSale.bid(bidItem);
+    Item.findById(req.body.offer, function(err, bidItem){
+      forSale.bid(bidItem, function(){
+        res.redirect('/items/' + req.params.itemId);
+      });
     });
   });
-  res.redirect('/items/' + req.params.itemId);
 };
 
 exports.edit = function(req, res){
