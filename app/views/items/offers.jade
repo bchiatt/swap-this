@@ -1,6 +1,6 @@
 extends ../shared/template
 block content
-  h3 Accepting/Rejecting Offers
+  h3 Take it or Leave It
   .row
     .col-xs-9.col-xs-offset-3
       table
@@ -9,7 +9,7 @@ block content
           th Bid Items
           th Response
         tbody
-          loop for each bid in bids
+          loop for each bid in item.bids
           tr
             td :a(href=/items/:item._id)
             td :a(href=/items/:bid._id)

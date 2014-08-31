@@ -5,7 +5,6 @@ var bcrypt  = require('bcrypt'),
     _       = require('lodash'),
     fs      = require('fs'),
     path    = require('path'),
-//    Mailgun = require('mailgun-js'),
     Message = require('./message.js');
 
 function User(){
@@ -61,16 +60,9 @@ User.prototype.save = function(fields, file, cb){
   User.collection.save(this, cb);
 };
 
-// PRIVATE FUNCTIONS //
-
 User.prototype.send = function(receiver, message, cb){
   sendInternal(this._id, receiver._id, message, cb);
 };
-
-//we don't need this if we keep the switch statement above
-
- /* Message.send(this._id, receiver._id, obj.message, cb);
-};*/
 
 User.prototype.unread = function(cb){
   Message.unread(this._id, cb);
@@ -82,25 +74,7 @@ User.prototype.messages = function(cb){
 
 module.exports = User;
 
-//function sendText(to, body, cb){
-//  if(!to){return cb();}
-//
-//  var accountSid = process.env.TWSID,
-//      authToken  = process.env.TWTOK,
-//      from       = process.env.FROM,
-//      client     = require('twilio')(accountSid, authToken);
-//
-//  client.messages.create({to:to, from:from, body:body}, cb);
-//}
-
-//function sendEmail(from, to, subject, html, cb){
-//  if(!to){return cb();}
-//
-//  var mailgun = new Mailgun({apiKey:process.env.MGAPI, domain:process.env.MGDOM}),
-//      data    = {from:from, to:to, subject:subject, html:html};
-//
-//  mailgun.messages().send(data, cb);
-//}
+// PRIVATE FUNCTIONS //
 
 function sendInternal(from, to, subject, message, cb){
   var msg = new Message({frId:from, toId:to, subject:subject, body:message});

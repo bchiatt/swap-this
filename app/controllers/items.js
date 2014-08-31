@@ -73,17 +73,21 @@ exports.update = function(req, res){
 };
 
 exports.offers = function(req, res){
-  //Item.findPending(req.params.itemId, function(err, saleItem){
-   // Item.findById(req.params.itemId2, function(err, bidItem){
-  res.render('items/offers' /*, {saleItem:saleItem, bidItem:bidItem}*/);
-    //});
- // });
+  Item.findPending(req.params.itemId, function(err, saleItem){
+    Item.findById(req.params.itemId2, function(err, bidItem){
+      res.render('items/offers' , {saleItem:saleItem, bidItem:bidItem});
+    });
+  });
 };
 
 exports.accept = function(req, res){
-  //res.locals.user.accept(req.params.itemId, req.params.bidId, function(){
-  res.redirect('/profile');
-  //});
+  Item.findById(req.params.itemId, function(err, saleItem){
+    Item.findById(req.params.bidId, function(err, bidItem){
+      saleItem.accept(bidItem, function(err, cb){
+        res.redirect('/profile');
+      });
+    });
+  });
 };
 
 exports.reject = function(req, res){
