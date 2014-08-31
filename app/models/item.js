@@ -75,7 +75,7 @@ Item.prototype.update = function(fields, files, cb){
   properties.forEach(function(property){
     self[property] = fields[property][0];
   });
-  var oldphotos = this.photos,
+  var oldphotos = this.photosphotos,
       newphotos = moveFiles(files, oldphotos.length, '/img/' + this._id);
   this.photos = oldphotos.concat(newphotos);
   this.isAvailable  = (this.isAvailable==='true') ? true : false;
@@ -93,13 +93,16 @@ Item.prototype.cancelBids = function(cb){
   Item.collection.save(this, cb);
 };
 
-Item.prototype.accept = function(){
+Item.prototype.accept = function(bidItem, cb){
+  var winner = bidItem.ownerId;
+  bidItem.ownerId = this.ownerId;
+  this.ownerId = winner;
+  Item.collection.save(this, function(err,cb){
+    Item.collection.save(bidItem, cb);
+  });
 };
 
 Item.prototype.reject = function(){
-};
-
-Item.toggleIsAvailable = function(){
 };
 
 module.exports = Item;
