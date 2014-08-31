@@ -71,14 +71,17 @@ Item.offerCount = function(userId, cb){
 
 Item.findOffers = function(ownerId, cb){
   Item.collection.find({ownerId:ownerId, bids: {$not: {$size: 0}}}).toArray(function(err, pending){
-    async.map(pending, function(pend, cb){
-      async.map(pend.bids, function(bid, cb){
+    pending.forEach(function(offer, index, pending){
+      async.map(offer.bids, function(bid, callback){
         Item.findById(bid, function(err, item){
-          pend = {pend:pend, item:item};
-          cb(err, pend);
+          bid = {owned:offer, offered:item};
+          callback(err, bid);
         });
-      }, cb);
-    }, cb);
+      }, function(err, pending){
+        console.log('backend >>>>>>>>>>>>', err, pending);
+        cb(err, pending);
+      });
+    });
   });
 };
 

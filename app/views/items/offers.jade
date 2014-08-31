@@ -9,14 +9,13 @@ block content
           th Bid Items
           th Response
         tbody
-          each array1 in pendOffers
-            each offer in array1
-              tr
-                td : a(href='/items/pend._id')=pend.name
-                td : a(href='/items/item._id')=item.name
-                td
-                  a(href='/offers/item._Id/accept/bid._Id') Accept
-                  a(href='/offers/item._Id/reject/bid.Id') Reject
+          each offer in offers
+            tr
+              td: a(href='/items/#{offer.owned._id}')=offer.owned.name
+              td: a(href='/items/#{offer.offered._id}')=offer.offered.name
+              td
+                a(href='/offers/item._Id/accept/bid._Id') Accept
+                a(href='/offers/item._Id/reject/bid.Id') Reject
 
 
 
