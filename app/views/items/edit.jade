@@ -1,9 +1,11 @@
 extends ../shared/template
 block content
   .row
-    .col-xs-6
+    .col-xs-12
       h1 Edit Item:   #{item.name}
       br
+  .row
+    .col-xs-5.col-xs-offset-1
       form(role='form', method='post', enctype='multipart/form-data')
         .radio
           label

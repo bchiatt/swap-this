@@ -334,7 +334,7 @@ describe('users', function(){
       .set('cookie', cookie)
       .end(function(err, res){
         expect(res.status).to.equal(302);
-        expect(res.headers.location).to.include('/offers');
+        expect(res.headers.location).to.include('/profile');
         done();
       });
     });

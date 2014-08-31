@@ -25,7 +25,7 @@ block content
               td#name: a(href='/items/#{item._id}')=item.name
               td.photo.thumbnail#photo(style='background-image:url(#{item.photos[0]});')
               td= item.description
-              td.btn.btn-info.btn-default#edit: a(href='/items/#{item._id}/edit') Edit Item
+              td.btn-info.btn-default#edit: a(href='/items/#{item._id}/edit') Edit Item
   .row
     h1#available Not Available
     .col-xs-12
@@ -41,7 +41,7 @@ block content
               td= item.name
               td.photo.thumbnail#photo(style='background-image:url(#{item.photos[0]});')
               td= item.description
-              td.btn#edit: a(href='/items/#{item._id}/edit') Edit Item
+              td.btn-info.btn-default#edit: a(href='/items/#{item._id}/edit') Edit Item
 
 block scripts
 

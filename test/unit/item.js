@@ -24,15 +24,27 @@ describe('Item', function(){
     });
   });
 
- /* describe('.create', function(){
+  describe('constructor', function(){
     it('should create a new Item object', function(){
-      var ownerId = '000000000000000000000001',
-          fields  = {name:'car', description:'1990 Toyota Corolla', tags:'car, blue'},
-          files   = {};
-      Item.create(ownerId, fields, files, function(err, item){
-        expect(item._id).to.be.instanceof(Mongo.ObjectID);
-        expect(item.tags).to.have.length(2);
-        expect(item.isAvailable).to.be.true;
+      var i = new Item('000000000000000000000007',{name:['car'], description:['1990 Toyota Corolla'], isAvailable: ['true'], tags:['car, blue']});
+      expect (i).to.be.instanceof(Item);
+    });
+  });
+
+ /* describe('.create', function(){
+    it('should create a new Item object', function(done){
+      var i = '000000000000000000000001',
+          fields  = {name:['car'], description:['1990 Toyota Corolla'], isAvailable:['true'], tags:['car, blue']},
+          files   = {photo: [{path:''}]};
+
+      var i =  Item.create(ownerId, fields, files, function(){
+        Item.findById(i._id, function(err, item){
+          console.log('>>>III<<<', i);
+          expect(item._id).to.be.instanceof(Mongo.ObjectID);
+          expect(item.tags).to.have.length(2);
+          expect(item.isAvailable).to.be.true;
+          done();
+        });
       });
     });
   });*/
@@ -47,17 +59,27 @@ describe('Item', function(){
     });
   });
 
+ /* describe('#save', function(){
+    it ('should save the item to the database', function(done){
+      var i = new Item('000000000000000000000007',{name:['car'], description:['1990 Toyota Corolla'], isAvailable: ['true'], tags:['car, blue']});
+      i.save(function(){
+        expect(i._id).to.be.instanceof(Mongo.ObjectID);
+        done();
+      });
+    });
+  });*/
+
   /*describe('.find', function(){
     it('should find a specific item', function(done){
       Item.find({name:'car'}, function(err, item){
-        console.log(item);
+        console.log('ITEM*****', item);
         expect(item.description).to.equal('1990 Toyota Corolla');
         done();
       });
     });
-  });
+  });*/
 
-  describe('#save', function(){
+ /* describe('#save', function(){
     it('should save an item', function(done){
       var ownerId = '000000000000000000000001',
           fields  = {name:'car', description:'1990 Toyota Corolla', tags:'0'},
