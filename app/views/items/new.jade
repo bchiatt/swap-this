@@ -19,11 +19,11 @@ block content
           label(for='description') Description of Item
           textarea.form-control#description(type='text', name='description')
         .form-group
-          label(for='photo') Photo
-          input.form-control#photo(type='file', name='photo', value=user.photo, multiple=true)
+          label(for='photo') Photos
+          input.form-control#photo(type='file', name='photo', multiple=true)
         .form-group
           label(for='tags') Tags
-          input.form-control#tags(type='text', name='tags', value=user.tags)
+          input.form-control#tags(type='text', name='tags')
         button.btn.btn-success.btn-group-lg(type='submit') Add Item
 
 block scripts

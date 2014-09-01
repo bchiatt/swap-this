@@ -49,14 +49,15 @@ Item.query = function(query, cb){
   Item.collection.find(filter).sort(sort).skip(skip).limit(limit).toArray(cb);
 };
 
-Item.prototype.save = function(fields, files, cb){
+Item.prototype.update = function(fields, files, cb){
+  console.log('FILES in update>>>>>  :', files);
   var properties = Object.keys(fields),
       self       = this;
   properties.forEach(function(property){
     self[property] = fields[property][0];
   });
   var oldphotos = this.photos,
-      newphotos = moveFiles(files.photos, oldphotos.length, '/img/' + this._id);
+      newphotos = moveFiles(files, oldphotos.length, '/img/' + this._id);
   this.photos = oldphotos.concat(newphotos);
   Item.collection.save(this, cb);
 };
@@ -73,6 +74,8 @@ function moveFiles(files, count, relDir){
       absDir  = baseDir + relDir;
 
   if(!fs.existsSync(absDir)){fs.mkdirSync(absDir);}
+  console.log('FILES in moveFILES>>>>>  :', files);
+  console.log('FILES.PHOTO in moveFILES>>>>>  :', files.photo);
 
   var tmpPhotos = files.photo.map(function(photo, index){
     if(!photo.size){return;}
