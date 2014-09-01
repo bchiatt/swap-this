@@ -20,7 +20,7 @@ block content
             each item in items
               tr
                 //(data-name=item.location, data-lat=item.lat, data-lng=item.lng)
-                td.photo.thumbnail(style='background-image:url(#{item.photo[0]});')
+                td.photo.thumbnail(style='background-image:url(#{item.photos[0]});')
                 td: a(href='/items/#{item._id}')= item.name
                 td: a(href='/items/#{item._id}')= item.description
                 td: a(href='/items/#{item._id}')= item.bids

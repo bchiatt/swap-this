@@ -34,7 +34,9 @@ module.exports = function(app, express){
   app.get('/profile', users.home);
   app.get('/profile/edit', users.edit);
   app.post('/profile', users.update);
+  app.get('/items', items.index);
   app.get('/items/new', items.new);
+  app.post('/items', items.create);
   app.get('/items/:itemId', items.show);
   app.get('/items/:itemId/bid', items.newBid);
   app.post('/items/:itemId/bid', items.bid);
