@@ -61,6 +61,7 @@ Item.offerCount = function(userId, cb){
 };
 
 Item.findPending = function(ownerId, cb){
+  console.log('ownerId in Item.findPending>>>> ', ownerId);
   var pending = [],
       pubItem = [];
   Item.collection.find({ownerId:ownerId, isAvailble:true}.toArray(function(err, availableItems){
@@ -84,6 +85,7 @@ Item.prototype.update = function(fields, files, cb){
 
 Item.prototype.bid = function(bidId, cb){
   this.bids.push(bidId);
+  Item.collection.save(this, cb);
 };
 
 Item.prototype.cancelBids = function(cb){

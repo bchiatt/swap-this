@@ -11,6 +11,8 @@ exports.new = function(req, res){
 exports.create = function(req, res){
   var form = new mp.Form();
   form.parse(req, function(err, fields, files){
+    console.log('FIELDS in create>>>>>> ', fields);
+    console.log('FILES in create>>>>>> ', files);
     Item.create(res.locals.user._id, fields, files, function(){
       res.redirect('/profile');
     });
@@ -45,14 +47,13 @@ exports.newBid = function(req, res){
 
 exports.bid = function(req, res){
   Item.findById(req.params.itemId, function(err, forSale){
+    console.log('forSale in exports.bid>>>>>>', forSale);
+    console.log('req.params.bidId in exports.bid>>>>>>', req.params.bidId);
     Item.findById(req.params.bidId, function(err, bidItem){
       forSale.bid(bidItem);
     });
   });
   res.redirect('/items/' + req.params.itemId);
-  //res.locals.user.bid(req.params.itemId, req.params.bidId, function(){
-    //res.redirect('/items/' + req.params.itemId);
-  //});
 };
 
 exports.edit = function(req, res){
@@ -82,7 +83,7 @@ exports.offers = function(req, res){
 
 exports.accept = function(req, res){
   //res.locals.user.accept(req.params.itemId, req.params.bidId, function(){
-  res.redirect('/offers');
+  res.redirect('/profile');
   //});
 };
 

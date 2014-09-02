@@ -35,7 +35,10 @@ $ npm test
 ```
 
 ### Contributors
-- [Chyld Medford](https://github.com/chyld)
+- [Brian Hiatt](brian.hiatt41@gmail.com)
+- [Jessica Raines](jessicafraines@gmail.com)
+- [Sarah Pearson](sarahp@me.com)
+- [Joy Pratt](joypratt820@gmail.com)
 
 ### License
 [MIT](LICENSE)
