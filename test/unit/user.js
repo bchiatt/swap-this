@@ -69,9 +69,9 @@ describe('User', function(){
         });
       });
     });
-  });
+  });*/
 
-  describe('#send', function(){
+ /* describe('#send', function(){
     it('should send a text message to a user', function(done){
       User.findById('000000000000000000000001', function(err, sender){
         User.findById('000000000000000000000002', function(err, receiver){
@@ -97,8 +97,8 @@ describe('User', function(){
     it('should send an internal message to a user', function(done){
       User.findById('000000000000000000000001', function(err, sender){
         User.findById('000000000000000000000003', function(err, receiver){
-          sender.send(receiver, {mtype:'internal', subject:'hello', message:'whazup'}, function(err, response){
-            Message.find({receiverId:Mongo.ObjectID('000000000000000000000003')}, function(err, messages){
+          sender.send(receiver, {mtype:'internal', message:'whazup'}, function(err, response){
+            Message.find({receiverId:'000000000000000000000003'}, function(err, messages){
               expect(messages).to.have.length(3);
               done();
             });
@@ -108,7 +108,7 @@ describe('User', function(){
     });
   });
   //I'm not sure how we test for messages - I entered 2 based off Brian's test for FB
-  describe('#messages', function(){
+ /* describe('#messages', function(){
     it('should show all user messages', function(done){
       User.findById('000000000000000000000003', function(err, client){
         client.messages(function(err, messages){
